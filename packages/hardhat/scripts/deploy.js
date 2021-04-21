@@ -8,7 +8,20 @@ const R = require("ramda");
 const main = async () => {
   console.log("\n\n 📡 Deploying...\n");
 
-  const yourContract = await deploy("Mullusk"); // <-- add in constructor args like line 19 vvvv
+  // address _summoner,
+  // address[] memory _approvedTokens,
+  // uint256 _periodDuration,
+  // uint256 _votingPeriodLength,
+  // uint256 _gracePeriodLength,
+  // uint256 _proposalDeposit,
+  // uint256 _dilutionBound,
+  // uint256 _processingReward
+  const yourContract = await deploy(
+    "Mollusk",
+    "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266", // _summoner
+    [], // _approvedTokens
+    17280 // _periodDuration
+  ); // <-- add in constructor args like line 19 vvvv
 
   // const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   // const secondContract = await deploy("SecondContract")
