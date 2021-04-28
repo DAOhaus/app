@@ -1,3 +1,60 @@
 .App {
   text-align: center;
 }
+
+/* shorthand */
+.flex { display: flex;}
+.relative { position: relative;}
+.absolute { position: absolute;}
+
+.column { flex-direction: column;}
+.row { flex-direction: row;}
+.justify-content-center { justify-content: center;}
+.justify-content-end { justify-content: flex-end;}
+.align-items-center { align-items: center;}
+.align-items-end { align-items: flex-end;}
+.flexCenter { display: flex; justify-content: center; align-items: center;}
+.block { display: block; }
+.overflow-hidden { overflow: hidden;}
+.rounded-corners { border-radius: 5px; }
+
+.text-align-center { text-align: center;}
+
+.largeFont { font-size: 28px; }
+.mediumFont { font-size: 16px; }
+.smallFont { font-size: 8px; }
+
+.vh100 { height: 100vh; }
+.h100 { height: 100px;}
+.w100p { width: 100%;}
+.w100 { width: 100px;}
+.h100 { height: 100px;}
+.w200 { width: 200px;}
+.h200 { height: 200px;}
+.w300 { width: 300px;}
+.h300 { height: 300px;}
+.w700 { width: 700px;}
+
+.m0 { margin: 0 !important; }
+.mb5 { margin-bottom: 5px;}
+.mb10 { margin-bottom: 10px;}
+.mb20 { margin-bottom: 20px;}
+
+.mr5 { margin-right: 5px;}
+.mr10 { margin-right: 10px;}
+.mr20 { margin-right: 20px;}
+
+.ml5 { margin-left: 5px;}
+.ml10 { margin-left: 10px;}
+.ml20 { margin-left: 20px;}
+
+.mt5 { margin-top: 5px;}
+.mt10 { margin-top: 10px;}
+.mt20 { margin-top: 20px;}
+
+.p10 { padding: 10px;}
+.p20 { padding: 20px;}
+.p30 { padding: 30px;}
+
+.background-gray { background-color: lightgray;}
+.background-white { background-color: white;}

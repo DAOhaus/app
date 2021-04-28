@@ -1,1 +1,1 @@
-module.exports = ["Mollusk"];
+module.exports = ["Mollusk","Token"];

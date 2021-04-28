@@ -9,16 +9,17 @@ const main = async () => {
   console.log("\n\n 📡 Deploying...\n");
 
   const onedayinseconds = 86400;
-  const yourContract = await deploy("Mollusk", [
-    "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-    ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-    onedayinseconds,
-    7,
-    7,
-    "100000000000000000",
-    3,
-    "100000000000000000",
-  ]);
+  // const yourContract = await deploy("Mollusk", [
+  //   "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  //   ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
+  //   onedayinseconds,
+  //   7,
+  //   7,
+  //   "100000000000000000",
+  //   3,
+  //   "100000000000000000",
+  // ]);
+  const yourContract = await deploy("Token", ["1000000000000000000"]);
 
   // const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   // const secondContract = await deploy("SecondContract")
