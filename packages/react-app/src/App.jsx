@@ -199,30 +199,30 @@ function App(props) {
     }
   }, [myMainnetDAIBalance]); // For Buyer-Lazy-Mint Branch: balance, transferEvents
 
-  let networkDisplay = "";
-  if (localChainId && selectedChainId && localChainId != selectedChainId) {
-    networkDisplay = (
-      <div style={{ zIndex: 2, position: "absolute", right: 0, top: 60, padding: 16 }}>
-        <Alert
-          message="⚠️ Wrong Network"
-          description={
-            <div>
-              You have <b>{NETWORK(selectedChainId).name}</b> selected and you need to be on{" "}
-              <b>{NETWORK(localChainId).name}</b>.
-            </div>
-          }
-          type="error"
-          closable={false}
-        />
-      </div>
-    );
-  } else {
-    networkDisplay = (
-      <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: targetNetwork.color }}>
-        {targetNetwork.name}
-      </div>
-    );
-  }
+  const networkDisplay = "";
+  // if (localChainId && selectedChainId && localChainId != selectedChainId) {
+  //   networkDisplay = (
+  //     <div style={{ zIndex: 2, position: "absolute", right: 0, top: 60, padding: 16 }}>
+  //       <Alert
+  //         message="⚠️ Wrong Network"
+  //         description={
+  //           <div>
+  //             You have <b>{NETWORK(selectedChainId).name}</b> selected and you need to be on{" "}
+  //             <b>{NETWORK(localChainId).name}</b>.
+  //           </div>
+  //         }
+  //         type="error"
+  //         closable={false}
+  //       />
+  //     </div>
+  //   );
+  // } else {
+  //   networkDisplay = (
+  //     <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: targetNetwork.color }}>
+  //       {targetNetwork.name}
+  //     </div>
+  //   );
+  // }
 
   const loadWeb3Modal = useCallback(async () => {
     const provider = await web3Modal.connect();
@@ -340,14 +340,14 @@ function App(props) {
               <Contract
                 name="Token"
                 signer={userProvider.getSigner()}
-                provider={localProvider}
+                provider={userProvider}
                 address={address}
                 blockExplorer={blockExplorer}
               />
               <Contract
                 name="Mollusk"
                 signer={userProvider.getSigner()}
-                provider={localProvider}
+                provider={userProvider}
                 address={address}
                 blockExplorer={blockExplorer}
               />

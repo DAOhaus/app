@@ -19,7 +19,11 @@ const main = async () => {
   //   3,
   //   "100000000000000000",
   // ]);
-  const yourContract = await deploy("Token", ["1000000000000000000"]);
+  const yourContract = await deploy("Token", [
+    "603 Miramar, Arecibo, Puerto Rico",
+    "603M",
+    "1000000000000000000000000",
+  ]);
 
   // const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
   // const secondContract = await deploy("SecondContract")
@@ -82,7 +86,7 @@ const deploy = async (
   overrides = {},
   libraries = {}
 ) => {
-  console.log(` 🛰  Deploying: ${contractName}`);
+  console.log(` 🛰  Deploying: ${contractName}`, _args, overrides, libraries);
 
   const contractArgs = _args || [];
   const contractArtifacts = await ethers.getContractFactory(contractName, {

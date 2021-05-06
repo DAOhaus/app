@@ -23,14 +23,28 @@ const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 //
 const defaultNetwork = "localhost";
 
-function mnemonic() {
+function pkey(extension) {
+  const file = "./pkey." + extension + ".txt";
   try {
-    return fs.readFileSync("./mnemonic.txt").toString().trim();
+    return fs.readFileSync(file).toString().trim();
+  } catch (e) {
+    console.log("☢️ WARNING: No pkey file created for a deploy account");
+  }
+  return "";
+}
+
+function mnemonic(extension) {
+  const mnemon = extension
+    ? "./mnemonic." + extension + ".txt"
+    : "./mnemonic.txt";
+  console.log(mnemon);
+  try {
+    return fs.readFileSync(mnemon).toString().trim();
   } catch (e) {
     if (defaultNetwork !== "localhost") {
-      console.log(
-        "☢️ WARNING: No mnemonic file created for a deploy account. Try `yarn run generate` and then `yarn run account`."
-      );
+      // console.log(
+      //   "☢️ WARNING: No mnemonic file created for a deploy account. Try `yarn run generate` and then `yarn run account`."
+      // );
     }
   }
   return "";
@@ -47,37 +61,41 @@ module.exports = {
   networks: {
     localhost: {
       url: "http://localhost:8545",
+      accounts: [pkey("abba")],
+      // accounts: {
+      //   mnemonic: mnemonic("abba"),
+      // },
       /*
         notice no mnemonic here? it will just use account 0 of the hardhat node to deploy
         (you can put in a mnemonic here to set the deployer locally)
       */
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://rinkeby.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
-        mnemonic: mnemonic(),
+        mnemonic: mnemonic("abba"),
       },
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://kovan.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://mainnet.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
-        mnemonic: mnemonic(),
+        mnemonic: mnemonic("abba"),
       },
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://ropsten.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     goerli: {
-      url: "https://goerli.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://goerli.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
@@ -119,6 +137,15 @@ module.exports = {
       },
       {
         version: "0.6.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+      {
+        version: "0.6.2",
         settings: {
           optimizer: {
             enabled: true,
