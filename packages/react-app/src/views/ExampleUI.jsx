@@ -85,7 +85,7 @@ export default function ExampleUI({purpose, setPurposeEvents, address, mainnetPr
 
         Your Contract Address:
         <Address
-            address={readContracts?readContracts.YourContract.address:readContracts}
+            address={readContracts?readContracts.Token.address:readContracts}
             ensProvider={mainnetProvider}
             fontSize={16}
         />

@@ -37,7 +37,6 @@ function mnemonic(extension) {
   const mnemon = extension
     ? "./mnemonic." + extension + ".txt"
     : "./mnemonic.txt";
-  console.log(mnemon);
   try {
     return fs.readFileSync(mnemon).toString().trim();
   } catch (e) {
@@ -61,7 +60,6 @@ module.exports = {
   networks: {
     localhost: {
       url: "http://localhost:8545",
-      accounts: [pkey("abba")],
       // accounts: {
       //   mnemonic: mnemonic("abba"),
       // },
