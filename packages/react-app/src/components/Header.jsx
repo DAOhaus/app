@@ -5,8 +5,8 @@ import { PageHeader } from "antd";
 
 export default function Header() {
   return (
-    <a href="https://github.com/austintgriffith/scaffold-eth" target="_blank" rel="noopener noreferrer">
+    <div style={{borderBotton: '1px solid'}}>
       <PageHeader title="legt" subTitle="legal governance tokens" style={{ cursor: "pointer" }} />
-    </a>
+    </div>
   );
 }

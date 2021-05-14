@@ -8,7 +8,7 @@ import { parseEther, formatEther } from "@ethersproject/units";
 
 export default function ExampleUI({purpose, setPurposeEvents, address, mainnetProvider, userProvider, localProvider, yourLocalBalance, price, tx, readContracts, writeContracts }) {
 
-  const [newPurpose, setNewPurpose] = useState("loading...");
+  const [state, setState] = useState({});
 
   return (
     <div>
@@ -17,7 +17,6 @@ export default function ExampleUI({purpose, setPurposeEvents, address, mainnetPr
       */}
       <div style={{border:"1px solid #cccccc", padding:16, width:400, margin:"auto",marginTop:64}}>
         <h2>Example UI:</h2>
-
         <h4>purpose: {purpose}</h4>
 
         <Divider/>
