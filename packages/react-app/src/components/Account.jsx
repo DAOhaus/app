@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "antd";
 import { useThemeSwitcher } from "react-css-theme-switcher";
+import {shortenAddress} from 'helpers'
 import Address from "./Address";
-import Balance from "./Balance";
-import Wallet from "./Wallet";
+// import Balance from "./Balance";
+// import Wallet from "./Wallet";
 
 /*
   ~ What it does? ~
@@ -88,23 +89,24 @@ export default function Account({
   ) : (
     <span>
       {address ? (
-        <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
+        shortenAddress(address)
+        // <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
       ) : (
         "Connecting..."
       )}
       {/* <Balance address={address} provider={localProvider} price={price} /> */}
-      <Wallet
+      {/* <Wallet
         address={address}
         provider={userProvider}
         ensProvider={mainnetProvider}
         price={price}
         color={currentTheme == "light" ? "#1890ff" : "#2caad9"}
-      />
+      /> */}
     </span>
   );
 
   return (
-    <div>
+    <div className="flex align-items-center row">
       {display}
       {modalButtons}
     </div>

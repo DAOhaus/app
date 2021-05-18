@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-size: 20px;
 }
 
 /* shorthand */
@@ -7,9 +8,12 @@
 .relative { position: relative;}
 .absolute { position: absolute;}
 
+.text-align-left { text-align: left;}
+
 .column { flex-direction: column;}
 .row { flex-direction: row;}
 .justify-content-center { justify-content: center;}
+.justify-content-between { justify-content: space-between;}
 .justify-content-end { justify-content: flex-end;}
 .align-items-center { align-items: center;}
 .align-items-end { align-items: flex-end;}
@@ -19,6 +23,8 @@
 .rounded-corners { border-radius: 5px; }
 
 .text-align-center { text-align: center;}
+.font-size-30 { font-size: 30px;}
+.font-size-20 { font-size: 20px;}
 
 .largeFont { font-size: 28px; }
 .mediumFont { font-size: 16px; }
@@ -27,6 +33,7 @@
 .vh100 { height: 100vh; }
 .h100 { height: 100px;}
 .w100p { width: 100%;}
+.w50 { width: 50px;}
 .w100 { width: 100px;}
 .h100 { height: 100px;}
 .w200 { width: 200px;}
@@ -50,6 +57,7 @@
 
 .mt5 { margin-top: 5px;}
 .mt10 { margin-top: 10px;}
+.mr10 { margin-right: 10px;}
 .mt20 { margin-top: 20px;}
 
 .p10 { padding: 10px;}

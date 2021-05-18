@@ -19,10 +19,10 @@ import {
   useBalance,
   useExternalContractLoader,
 } from "./hooks";
-import { Header, Account, Faucet, Ramp, Contract, GasGauge, ThemeSwitch } from "./components";
+import { Header, Account, Faucet, Ramp, Contract, GasGauge, ThemeSwitch, Highlight } from "./components";
 import { Transactor } from "./helpers";
 // import Hints from "./Hints";
-import { Hints, Token, Subgraph } from "./views";
+import { Hints, Token, Subgraph, Mint, Manage, Explore } from "./views";
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 /*
     Welcome to 🏗 scaffold-eth !
@@ -273,12 +273,25 @@ function App(props) {
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
-      <Header />
-      {networkDisplay}
       <BrowserRouter>
+      <Header
+        address={address}
+        localProvider={localProvider}
+        userProvider={userProvider}
+        mainnetProvider={mainnetProvider}
+        price={price}
+        web3Modal={web3Modal}
+        loadWeb3Modal={loadWeb3Modal}
+        logoutOfWeb3Modal={logoutOfWeb3Modal}
+        blockExplorer={blockExplorer}
+      />
+      {networkDisplay}
         <Switch>
-          <Route exact path="/">
-            <div>create</div>
+          <Route exact path="/mint">
+            <Mint />
+          </Route>
+          <Route exact path="/explore">
+            <Explore />
           </Route>
           <Route exact path="/contracts">
             {/*
@@ -370,7 +383,7 @@ function App(props) {
 
       <ThemeSwitch />
 
-      {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
+      {/* 👨‍💼 Your account is in the top right with a wallet at connect options
       <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
         <Account
           address={address}
@@ -384,7 +397,7 @@ function App(props) {
           blockExplorer={blockExplorer}
         />
         {faucetHint}
-      </div>
+      </div> */}
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
       {/* <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>

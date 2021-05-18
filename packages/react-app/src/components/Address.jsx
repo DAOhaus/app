@@ -3,6 +3,7 @@ import Blockies from "react-blockies";
 import { Typography, Skeleton } from "antd";
 import { useLookupAddress } from "../hooks";
 import { useThemeSwitcher } from "react-css-theme-switcher";
+import { shortenAddress } from "helpers";
 
 // changed value={address} to address={address}
 
@@ -49,7 +50,7 @@ export default function Address(props) {
     );
   }
 
-  let displayAddress = address.substr(0, 6);
+  let displayAddress = shortenAddress(address)
 
   if (ens && ens.indexOf("0x")<0) {
     displayAddress = ens;
@@ -73,19 +74,17 @@ export default function Address(props) {
   let text;
   if (props.onChange) {
     text = (
-      <Text editable={{ onChange: props.onChange }} copyable={{ text: address }}>
         <a style={{ color: currentTheme == "light" ? "#222222" : "#ddd" }} target={"_blank"} href={etherscanLink} rel="noopener noreferrer">
           {displayAddress}
         </a>
-      </Text>
     );
   } else {
     text = (
-      <Text copyable={{ text: address }}>
+      // <Text copyable={{ text: address }}>
         <a style={{ color: currentTheme == "light" ? "#222222" : "#ddd" }} target={"_blank"} href={etherscanLink} rel="noopener noreferrer">
           {displayAddress}
         </a>
-      </Text>
+      // </Text>
     );
   }
 
