@@ -41,12 +41,14 @@
 .w300 { width: 300px;}
 .h300 { height: 300px;}
 .w700 { width: 700px;}
+.maxw700 { max-width: 700px;}
 
 .m0 { margin: 0 !important; }
 .mb5 { margin-bottom: 5px;}
 .mb10 { margin-bottom: 10px;}
 .mb20 { margin-bottom: 20px;}
 
+.mauto { margin: auto;}
 .mr5 { margin-right: 5px;}
 .mr10 { margin-right: 10px;}
 .mr20 { margin-right: 20px;}

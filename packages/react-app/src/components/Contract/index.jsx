@@ -51,6 +51,7 @@ export default function Contract({
   provider,
   name,
   show,
+  hideCardTitle,
   price,
   blockExplorer,
 }) {
@@ -107,10 +108,10 @@ export default function Contract({
   });
 
   return (
-    <div style={{ width: "70vw" }}>
+    <div>
       <Card
         title={
-          <div>
+          !hideCardTitle && <div>
             {name}
             <div style={{ float: "right" }}>
               <Account
