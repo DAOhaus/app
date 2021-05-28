@@ -5,6 +5,11 @@ const { config, ethers, tenderly, run } = require("hardhat");
 const { utils } = require("ethers");
 const R = require("ramda");
 
+const accounts = [
+  "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "0x956ecd469331426B1EA528e8291eEe87f74305b8",
+];
+
 const main = async () => {
   console.log("\n\n 📡 Deploying...\n");
 
@@ -19,10 +24,12 @@ const main = async () => {
   //   3,
   //   "100000000000000000",
   // ]);
-  const yourContract = await deploy("Token", [
-    "603 Miramar, Arecibo, Puerto Rico",
-    "603M",
-    "1000000000000000000000000",
+  const Token = await deploy("Token", [
+    "LOCAL 603 Miramar, Arecibo, Puerto Rico",
+    "L603M",
+    "https://johndangerstorey.com/resume.pdf",
+    [accounts[0], accounts[1]],
+    ["500000000000000000000000", "500000000000000000000000"],
   ]);
 
   // const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!

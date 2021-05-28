@@ -8,7 +8,6 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
 import { formatEther, parseEther } from "@ethersproject/units";
-import { useThemeSwitcher } from "react-css-theme-switcher";
 import {
   useExchangePrice,
   useGasPrice,
@@ -79,7 +78,7 @@ function App(props) {
   /* 🔥 This hook will get the price of Gas from ⛽️ EtherGasStation */
   const gasPrice = useGasPrice(targetNetwork, "fast");
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
-  const userProvider = useUserProvider(injectedProvider, localProvider);
+  const userProvider = useUserProvider(injectedProvider);
   const address = useUserAddress(userProvider);
 
   // You can warn the user if you would like them to be on a specific network
@@ -302,14 +301,14 @@ function App(props) {
             <div className="flex justify-content-center">
               <Contract
                 name="Token"
-                signer={userProvider.getSigner()}
+                signer={userProvider?.getSigner()}
                 provider={userProvider}
                 address={address}
                 blockExplorer={blockExplorer}
               />
               <Contract
                 name="Mollusk"
-                signer={userProvider.getSigner()}
+                signer={userProvider?.getSigner()}
                 provider={userProvider}
                 address={address}
                 blockExplorer={blockExplorer}
@@ -364,7 +363,7 @@ function App(props) {
             <Contract
               name="DAI"
               customContract={mainnetDAIContract}
-              signer={userProvider.getSigner()}
+              signer={userProvider?.getSigner()}
               provider={mainnetProvider}
               address={address}
               blockExplorer="https://etherscan.io/"
@@ -381,7 +380,7 @@ function App(props) {
         </Switch>
       </BrowserRouter>
 
-      <ThemeSwitch />
+      {/* <ThemeSwitch /> */}
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options
       <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>

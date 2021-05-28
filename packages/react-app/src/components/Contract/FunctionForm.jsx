@@ -20,7 +20,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
 
   let inputIndex = 0;
   const inputs = functionInfo.inputs.map(input => {
-
+    // TODO: order inputs by type
     const key = functionInfo.name + "_" + input.name + "_" + input.type + "_" + inputIndex++
 
     let buttons = ""
@@ -224,7 +224,6 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
       />
     </div>,
   );
-
   return (
     <div>
       <Row>

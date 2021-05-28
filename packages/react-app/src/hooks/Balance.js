@@ -21,7 +21,6 @@ export default function useBalance(provider, address, pollTime) {
   const pollBalance = async () => {
     if (address && provider) {
       const newBalance = await provider.getBalance(address);
-      console.log("NEW BALANCE:", newBalance, "Current balance", balance);
       if (newBalance !== balance) {
         setBalance(newBalance);
       }

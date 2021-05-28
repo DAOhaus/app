@@ -13,7 +13,7 @@ const Highlight = styled.span`
     right: 0;
     position: absolute;
     opacity: .3;
-    background-color: ${({ color = "red" }) => colors[color]}
+    background-color: ${({ color = "blue" }) => colors[color]}
   }
 `;
 export default Highlight

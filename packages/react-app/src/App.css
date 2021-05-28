@@ -8,7 +8,7 @@
 .relative { position: relative;}
 .absolute { position: absolute;}
 
-.text-align-left { text-align: left;}
+.text-align-left, .tal { text-align: left;}
 
 .column { flex-direction: column;}
 .row { flex-direction: row;}
@@ -52,6 +52,7 @@
 .mr5 { margin-right: 5px;}
 .mr10 { margin-right: 10px;}
 .mr20 { margin-right: 20px;}
+.mb20 { margin-bottom: 20px;}
 
 .ml5 { margin-left: 5px;}
 .ml10 { margin-left: 10px;}
