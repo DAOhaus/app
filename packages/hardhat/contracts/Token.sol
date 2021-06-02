@@ -23,7 +23,7 @@ contract Token is Ownable, ERC20 {
   ) public {
     name = name_;
     symbol = symbol_;
-    documentURI = documentURI_,
+    documentURI = documentURI_;
     decimals = 18;
     for(uint256 i = 0; i < members.length; i++) {
       _mint(members[i], amounts[i]);

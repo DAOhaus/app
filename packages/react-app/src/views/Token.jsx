@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState, useEffect } from "react";
 import ChartistGraph from 'react-chartist';
-import { Input, Dropdown } from 'semantic-ui-react'
+import { Input, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
 import { Contract } from 'components'
 import styled from "styled-components"
 import { toBN, fromWei } from 'helpers/numbers'
@@ -15,6 +15,12 @@ const ContractWrapper = styled.div`
   margin-top: 30px;
 `
 
+const StyledInput = styled(Input)`
+  margin-bottom: 5px;
+  width: 100%;
+  max-width: 700px;
+`
+
 const Square = styled.a`
   width: 200px;
   height: 200px;
@@ -24,7 +30,7 @@ const Square = styled.a`
   justify-content: center;
   align-items: center;
   &:hover{
-    box-shadow: 2px 2px 5px gray;
+    box-shadow: 2px 2px 5px lightgray;
   }
 `
 
@@ -33,13 +39,13 @@ export default function Token({
   blockExplorer,
   userProvider
 }) {
-  const {address} = useParams();
-  const [state, setState] = useState({address});
+  const { address } = useParams();
+  const [state, setState] = useState({ address });
   const contract = useExternalContractLoader(userProvider, address, erc20abi)
-  useEffect(()=>{
-    if (contract && !state.name && !state.isFetching){
+  useEffect(() => {
+    if (contract && !state.name && !state.isFetching) {
       setContractInfo()
-      setState({...state,isFetching: true})
+      setState({ ...state, isFetching: true })
     }
   })
   async function setContractInfo() {
@@ -51,14 +57,14 @@ export default function Token({
     setState({
       name,
       symbol,
-      totalSupply: fromWei(toBN(totalSupply), 'ether'),
+      totalSupply,
       documentURI,
       owner,
       isFetching: false
     })
   }
 
-  if (contract && userAddress && !state.name){
+  if (contract && userAddress && !state.name) {
     setContractInfo()
   }
 
@@ -69,52 +75,55 @@ export default function Token({
   ]
 
 
-  return <div className="p20 mt20">
-    <div className="flex justify-content-between mauto mb20" style={{maxWidth: "750px", padding: '25px'}}>
-    <Square target="_blank" href={state.documentURI}>Documents 📑</Square>
-    <Square>Stake 🏦</Square>
-    <Square>Vote ⚖</Square>
-    </div>
-    <Input
-      className="mb5 w100p maxw700"
-      label="Name"
-      value={state.name}
-      placeholder='Token Name'
-    />
-    <Input
-      className="mb5 w100p maxw700"
-      label="Symbol"
-      value={state.symbol}
-      placeholder='123L'
-    />
-    <Input
-      className="mb5 w100p maxw700"
-      label="Total Supply"
-      value={state.totalSupply}
-      placeholder='50'
-    />
-    <div>
-    </div>
-      {userAddress?.toLowerCase() === state?.owner?.toLowerCase() &&
-      <ContractWrapper>
-        <h2>Admin Tools 🛠</h2>
-        <Contract
-          name="Token"
-          hideInputs={[
-            'decimals', 
-            'renounceOwnership', 
-            'allowance', 
-            'approve', 
-            'decreaseAllowance', 
-            'increaseAllowance'
-          ]}
-          signer={userProvider?.getSigner()}
-          provider={userProvider}
-          address={state.address}
-          hideCardTitle
-          blockExplorer={blockExplorer}
+  return !state.name
+    ? <Dimmer active>
+      <Loader />
+    </Dimmer>
+    : <div className="p20 mt20">
+      <div className="flex justify-content-between mauto mb20" style={{ maxWidth: "750px", padding: '25px' }}>
+        <Square target="_blank" href={state.documentURI}>Documents 📑</Square>
+        <Square>Stake 🏦</Square>
+        <Square>Vote ⚖</Square>
+      </div>
+      <div className="flex column align-items-center">
+        <StyledInput
+          label="Name"
+          value={state.name}
+          placeholder='Token Name'
         />
-      </ContractWrapper>
-}
-  </div>;
+        <StyledInput
+          label="Symbol"
+          value={state.symbol}
+          placeholder='123L'
+        />
+        <StyledInput
+          label="Total Supply"
+          value={state.totalSupply}
+          placeholder='50'
+        />
+      </div>
+      <div>
+      </div>
+      {userAddress?.toLowerCase() === state?.owner?.toLowerCase() &&
+        <ContractWrapper>
+          <h2>Admin Tools 🛠</h2>
+          <Contract
+            name="Token"
+            hideInputs={[
+              'decimals',
+              'renounceOwnership',
+              'allowance',
+              'approve',
+              'decreaseAllowance',
+              'increaseAllowance'
+            ]}
+            signer={userProvider?.getSigner()}
+            provider={userProvider}
+            address={state.address}
+            hideCardTitle
+            blockExplorer={blockExplorer}
+          />
+        </ContractWrapper>
+      }
+    </div>;
 }

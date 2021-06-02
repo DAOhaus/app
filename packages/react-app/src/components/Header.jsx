@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../static/logo192.png";
-import { Highlight, Account, ThemeSwitch } from 'components'
+import { Highlight, Account, ThemeSwitch, Text } from 'components'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Dropdown, Button } from "semantic-ui-react";
@@ -14,6 +14,7 @@ const NetworkName = styled.div`
   position: absolute;
   left: 0;
   bottom: -10px;
+  color: lightgray;
   font-size: 12px;
 `
 

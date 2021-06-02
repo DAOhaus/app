@@ -12,6 +12,7 @@
 
 .column { flex-direction: column;}
 .row { flex-direction: row;}
+.wrap { flex-wrap: wrap;}
 .justify-content-center { justify-content: center;}
 .justify-content-between { justify-content: space-between;}
 .justify-content-end { justify-content: flex-end;}
