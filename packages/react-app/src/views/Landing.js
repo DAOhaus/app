@@ -12,11 +12,6 @@ function App() {
           <p className='text-medium text-gray'>
             linking tokens with legal documents & trusted 3rd party entities
             <div className="m30"></div>
-            <div>empowers assets to be used in DeFi</div>
-            <div>handles real world cataclystic events</div>
-            <div>applies jurisdictional compliance</div>
-            <div>resolves hard fork disputes</div>
-            <div>elastic lines of credit</div>
           </p>
 
         </div>

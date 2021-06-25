@@ -14,18 +14,8 @@ const main = async () => {
   console.log("\n\n 📡 Deploying...\n");
 
   const onedayinseconds = 86400;
-  // const yourContract = await deploy("Mollusk", [
-  //   "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-  //   ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-  //   onedayinseconds,
-  //   7,
-  //   7,
-  //   "100000000000000000",
-  //   3,
-  //   "100000000000000000",
-  // ]);
   const Token = await deploy("Token", [
-    "LOCAL 603 Miramar, Arecibo, Puerto Rico",
+    "LOCAL",
     "L603M",
     "https://johndangerstorey.com/resume.pdf",
     [accounts[0], accounts[1]],
