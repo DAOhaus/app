@@ -19,7 +19,7 @@ const Square = styled.div`
   cursor: pointer;
   margin: 0 20px 20px 0;
   &:hover{
-    box-shadow: 2px 2px 5px lightgray;
+    box-shadow: 0px 0px 2px lightgray;
   }
   &.active {
       width: 400px;
@@ -36,7 +36,7 @@ const toggleActive = (e) => {
 export default (props) => {
   return <PageWrapper  >
     <div className="flex wrap justify-content-center">
-      <Square onClick={toggleActive} />
+      <Square onClick={toggleActive} title="Suite A" subtitle="lorem ipsum that is very long longer than the box"/>
       <Square onClick={toggleActive} />
       <Square onClick={toggleActive} />
       <Square onClick={toggleActive} />

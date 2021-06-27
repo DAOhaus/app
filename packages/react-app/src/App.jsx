@@ -21,7 +21,7 @@ import {
 import { Header, Account, Faucet, Ramp, Contract, GasGauge, ThemeSwitch, Highlight } from "./components";
 import { Transactor } from "./helpers";
 // import Hints from "./Hints";
-import { Hints, Token, Subgraph, Mint, Manage, Explore } from "./views";
+import { Hints, Token, Subgraph, Mint, Manage, Explore, Detail } from "./views";
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 /*
     Welcome to 🏗 scaffold-eth !
@@ -291,6 +291,9 @@ function App(props) {
           </Route>
           <Route exact path="/explore">
             <Explore />
+          </Route>
+          <Route exact path="/unit/:id?">
+            <Detail />
           </Route>
           <Route exact path="/contracts">
             {/*
