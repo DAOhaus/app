@@ -12,9 +12,7 @@ iframe{
 .relative { position: relative;}
 .absolute { position: absolute;}
 
-.text-align-left, .tal { text-align: left;}
-
-.column { flex-direction: column;}
+column { flex-direction: column;}
 .row { flex-direction: row;}
 .wrap { flex-wrap: wrap;}
 .justify-content-center { justify-content: center;}
@@ -27,7 +25,9 @@ iframe{
 .overflow-hidden { overflow: hidden;}
 .rounded-corners { border-radius: 5px; }
 
-.text-align-center { text-align: center;}
+.text-align-center, .tac { text-align: center;}
+.text-align-right, .tar { text-align: right;}
+.text-align-left, .tal { text-align: left;}
 .font-size-30 { font-size: 30px;}
 .font-size-20 { font-size: 20px;}
 
@@ -39,6 +39,7 @@ iframe{
 .h100 { height: 100px;}
 .w100p { width: 100%;}
 .w50 { width: 50px;}
+.w50p { width: 50%;}
 .w100 { width: 100px;}
 .h100 { height: 100px;}
 .w200 { width: 200px;}
@@ -58,6 +59,7 @@ iframe{
 .mr10 { margin-right: 10px;}
 .mr20 { margin-right: 20px;}
 .mb20 { margin-bottom: 20px;}
+.mb40 { margin-bottom: 40px;}
 
 .ml5 { margin-left: 5px;}
 .ml10 { margin-left: 10px;}
@@ -72,5 +74,6 @@ iframe{
 .p20 { padding: 20px;}
 .p30 { padding: 30px;}
 
-.background-gray { background-color: lightgray;}
+.background-gray { background-color: gray;}
+.background-lightgray { background-color: lightgray;}
 .background-white { background-color: white;}

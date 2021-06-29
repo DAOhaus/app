@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../static/logo192.png";
+import logo from "static/logo-square.png";
 import { Highlight, Account, ThemeSwitch, Text } from 'components'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -29,10 +29,10 @@ export default function Header({address,logoutOfWeb3Modal, loadWeb3Modal, userPr
           <img src={logo} className="w50" alt="balance" />
         </span>
         <HeaderLink to="/mint"> <Highlight color="red">Mint</Highlight> </HeaderLink>
-        <HeaderLink to="/token"> <Highlight color="blue">Manage</Highlight> </HeaderLink>
+        {/* <HeaderLink to="/token"> <Highlight color="blue">Manage</Highlight> </HeaderLink> */}
         <HeaderLink to="/explore"> <Highlight color="yellow">Explore</Highlight> </HeaderLink>
         {process.env !== 'production' &&
-          <HeaderLink to="/contracts"> <Highlight color="green">Contracts</Highlight> </HeaderLink>
+          <HeaderLink to="/contracts"> <Highlight color="blue">Contracts</Highlight> </HeaderLink>
         }
       </div>
       <div className="flex align-items-center">

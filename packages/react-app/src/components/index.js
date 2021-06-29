@@ -18,3 +18,4 @@ export { default as Swap } from "./Swap";
 export { default as ThemeSwitch } from "./ThemeSwitch";
 export { default as PageWrapper } from "./PageWrapper";
 export { default as Highlight } from "./Highlight";
+export { default as SquareGrid } from "./SquareGrid";
