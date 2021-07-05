@@ -13,7 +13,6 @@ function App() {
             linking tokens with legal documents & trusted 3rd party entities
             <div className="m30"></div>
           </p>
-
         </div>
         <div class="flex">
         <a className="pointer" href="mailto:john@legt.co">✉️</a>

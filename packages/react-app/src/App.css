@@ -12,8 +12,10 @@ iframe{
 .relative { position: relative;}
 .absolute { position: absolute;}
 
-column { flex-direction: column;}
+.column { flex-direction: column;}
 .row { flex-direction: row;}
+.rowWhenLarge { flex-direction: column; }
+@media (min-width:1000px) { .rowWhenLarge { flex-direction: row; } }
 .wrap { flex-wrap: wrap;}
 .justify-content-center { justify-content: center;}
 .justify-content-between { justify-content: space-between;}
@@ -40,6 +42,8 @@ column { flex-direction: column;}
 .w100p { width: 100%;}
 .w50 { width: 50px;}
 .w50p { width: 50%;}
+.w50p-when-large{ width: 100%; }
+@media (min-width:1000px) { .w50p-when-large { width: 50%; }}
 .w100 { width: 100px;}
 .h100 { height: 100px;}
 .w200 { width: 200px;}
@@ -60,7 +64,6 @@ column { flex-direction: column;}
 .mr20 { margin-right: 20px;}
 .mb20 { margin-bottom: 20px;}
 .mb40 { margin-bottom: 40px;}
-
 .ml5 { margin-left: 5px;}
 .ml10 { margin-left: 10px;}
 .ml20 { margin-left: 20px;}
@@ -77,3 +80,6 @@ column { flex-direction: column;}
 .background-gray { background-color: gray;}
 .background-lightgray { background-color: lightgray;}
 .background-white { background-color: white;}
+.border-radius { border-radius: 3px; }
+
+.outline { outline: 1px solid blue;}
