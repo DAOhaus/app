@@ -33,4 +33,4 @@ Paths & Order Needed
 Preferred Order:
  - AWA - events, water & crypto (music & arts & sound frequency water)
  - DAOHAUS - keep coding
- - LEGT - find financial & legal partners (start bank - but need for litigation - I have potential legal...)
+ - LEGT - find financial & legal partners (start bank - but need for litigation - I have potential legal...)g
