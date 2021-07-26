@@ -1,8 +1,5 @@
+import { PageHeader } from "antd";
 import React from "react";
-import logo from "../static/logo192.png";
-import { Highlight, Account } from 'components'
-import { Link } from 'react-router-dom'
-
 
 // displays a page header
 
