@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import "./App.css";
-import { Row, Col, Button, Menu, Alert, Switch as SwitchD } from "antd";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
@@ -21,7 +20,7 @@ import {
 import { Header, Account, Faucet, Ramp, Contract, GasGauge, ThemeSwitch, Highlight } from "./components";
 import { Transactor } from "./helpers";
 // import Hints from "./Hints";
-import { Hints, Token, Subgraph, Mint, Manage, Explore, Detail } from "./views";
+import { Hints, Token, Subgraph, Mint, Landing, Explore, Detail } from "./views";
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
 /*
     Welcome to 🏗 scaffold-eth !
@@ -285,6 +284,9 @@ function App(props) {
       />
       {networkDisplay}
         <Switch>
+          <Route exact path="/landing">
+            <Landing />
+          </Route>
           <Route exact path="/mint">
             <Mint />
           </Route>

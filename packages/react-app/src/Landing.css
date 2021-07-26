@@ -1,0 +1,41 @@
+.btn-outline-primary {
+  color: #0093ff;
+  cursor: pointer;
+  border-color: #0093ff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0093ff;
+  border-color: #0093ff;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700);
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  font-size: 14px;
+}
+
+a:not(.btn) {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+.underline { text-decoration: underline; }
+
+.section{
+  background-color: white;
+  max-width: 46em;
+  margin: 0 auto;
+}
+
+.page-buffer { padding: 15px; }
+.jumbotron{ text-align: center; }
+.jumbotron-desc { font-size: 12px; }
+li{ display: inherit;} /* removes bullet */ 
+@media (min-width: 400px) {
+  .jumbotron-desc { font-size: inherit; }
+}

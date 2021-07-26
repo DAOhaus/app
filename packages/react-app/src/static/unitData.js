@@ -1,4 +1,12 @@
 import placeholder from 'static/logo-square.png'
+const pieces = [
+  {
+    id:'id1',
+    url: '',
+    price: '',
+  }
+]
+
 const simpleChoices = [
   {
     title: 'Kitchen', options: [
@@ -6,7 +14,12 @@ const simpleChoices = [
         title: 'A',
         price: '100',
         url: 'https://www.ikea.pr/puertorico/en/pd/hyby-ceiling-lamp-white-art-10347393',
-        image: 'https://static.ikea.pr/assets/images/077/0607749_PE683178_S4.jpg'
+        image: 'https://static.ikea.pr/assets/images/077/0607749_PE683178_S4.jpg',
+        pieces: {
+          kitchenSink: 'id1',
+          ceilingLight: 'id45',
+          bathroomSink: 'id67',
+        }
       },
       { 
         title: 'B',
