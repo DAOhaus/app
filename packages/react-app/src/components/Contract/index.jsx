@@ -111,7 +111,7 @@ export default function Contract({
     <div>
       <Card
         title={
-          !hideCardTitle && <div>
+          <div>
             {name}
             <div style={{ float: "right" }}>
               <Account

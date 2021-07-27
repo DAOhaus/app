@@ -377,6 +377,8 @@ function App(props) {
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
+      {/* <Header /> */}
+      {networkDisplay}
       <BrowserRouter>
         <Menu style={{ textAlign: "center" }} selectedKeys={[route]} mode="horizontal">
           <Menu.Item key="/">
@@ -432,34 +434,12 @@ function App(props) {
         </Menu>
 
         <Switch>
-          <Route exact path="/mint">
-            <Mint />
-          </Route>
-          <Route exact path="/explore">
-            <Explore />
-          </Route>
-          <Route exact path="/contracts">
+          <Route exact path="/">
             {/*
                 🎛 this scaffolding is full of commonly used components
                 this <Contract/> component will automatically parse your ABI
                 and give you a form to interact with it locally
             */}
-            <div className="flex justify-content-center">
-              <Contract
-                name="Token"
-                signer={userProvider.getSigner()}
-                provider={userProvider}
-                address={address}
-                blockExplorer={blockExplorer}
-              />
-              <Contract
-                name="Mollusk"
-                signer={userProvider.getSigner()}
-                provider={userProvider}
-                address={address}
-                blockExplorer={blockExplorer}
-              />
-            </div>
 
             <Contract
               name="YourContract"
@@ -477,8 +457,8 @@ function App(props) {
               price={price}
             />
           </Route>
-          <Route path="/token/:address?">
-            <Token
+          <Route path="/exampleui">
+            <ExampleUI
               address={address}
               userSigner={userSigner}
               mainnetProvider={mainnetProvider}

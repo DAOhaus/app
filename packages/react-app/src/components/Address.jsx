@@ -3,6 +3,7 @@ import React from "react";
 import Blockies from "react-blockies";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 import { useLookupAddress } from "../hooks";
+import { shortenAddress } from "helpers";
 
 // changed value={address} to address={address}
 
@@ -49,7 +50,7 @@ export default function Address(props) {
     );
   }
 
-  let displayAddress = shortenAddress(address)
+  let displayAddress = shortenAddress ? shortenAddress(address) : address
 
   if (ens && ens.indexOf("0x") < 0) {
     displayAddress = ens;
@@ -87,6 +88,7 @@ export default function Address(props) {
         >
           {displayAddress}
         </a>
+        </Text>
     );
   } else {
     text = (
