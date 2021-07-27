@@ -54,6 +54,7 @@ export default function Contract({
   show,
   price,
   blockExplorer,
+  hideInputs,
   chainId,
 }) {
   const contracts = useContractLoader(provider, { chainId });
@@ -80,7 +81,7 @@ export default function Contract({
   const [refreshRequired, triggerRefresh] = useState(false);
   const noInputs = displayedContractFunctions.filter(fn => fn.inputs == 0).sort((a,b)=> a.name[0] > b.name[0] ? 1 : -1)
   const inputs = displayedContractFunctions.filter(fn => fn.inputs != 0).sort((a,b)=> a.name[0] > b.name[0] ? 1 : -1)
-  const functionsToDisplay = [...noInputs, ...inputs].filter(fn => hideInputs.indexOf(fn.name))
+  const functionsToDisplay = [...noInputs, ...inputs].filter(fn => (hideInputs || []).indexOf(fn.name))
   const contractDisplay = functionsToDisplay.map(fn => {
     if (isQueryable(fn)) {
       // If there are no inputs, just display return value
