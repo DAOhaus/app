@@ -1,10 +1,9 @@
-import React from "react";
 import { Button } from "antd";
+import React from "react";
 import { useThemeSwitcher } from "react-css-theme-switcher";
-import {shortenAddress} from 'helpers'
 import Address from "./Address";
-// import Balance from "./Balance";
-// import Wallet from "./Wallet";
+import Balance from "./Balance";
+import Wallet from "./Wallet";
 
 /*
   ~ What it does? ~
@@ -42,7 +41,7 @@ import Address from "./Address";
 
 export default function Account({
   address,
-  userProvider,
+  userSigner,
   localProvider,
   mainnetProvider,
   price,
@@ -89,19 +88,19 @@ export default function Account({
   ) : (
     <span>
       {address ? (
-        shortenAddress(address)
-        // <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
+        <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
       ) : (
         "Connecting..."
       )}
-      {/* <Balance address={address} provider={localProvider} price={price} /> */}
-      {/* <Wallet
+      <Balance address={address} provider={localProvider} price={price} />
+      <Wallet
         address={address}
-        provider={userProvider}
+        provider={localProvider}
+        signer={userSigner}
         ensProvider={mainnetProvider}
         price={price}
-        color={currentTheme == "light" ? "#1890ff" : "#2caad9"}
-      /> */}
+        color={currentTheme === "light" ? "#1890ff" : "#2caad9"}
+      />
     </span>
   );
 

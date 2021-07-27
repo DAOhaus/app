@@ -1,22 +1,5 @@
+import { PageHeader } from "antd";
 import React from "react";
-import logo from "static/logo-square.png";
-import { Highlight, Account, ThemeSwitch, Text } from 'components'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { Dropdown, Button } from "semantic-ui-react";
-import {shortenAddress} from 'helpers'
-const { version } = require("../../package.json");
-
-const HeaderLink = styled(Link)`
-  margin-right: 10px;
-`
-const NetworkName = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  color: lightgray;
-  font-size: 12px;
-`
 
 // displays a page header
 
@@ -26,7 +9,7 @@ export default function Header({address,logoutOfWeb3Modal, loadWeb3Modal, userPr
     <div className="flex justify-content-between align-items-center p20 text-align-left" style={{ borderBottom: "1px solid lightGray" }}>
       <div>
         <span className="mr20 font-size-30">
-          <img src={logo} className="w50" alt="balance" />
+          {/* <img src={logo} className="w50" alt="balance" /> */}
         </span>
         <HeaderLink to="/mint"> <Highlight color="red">Mint</Highlight> </HeaderLink>
         {/* <HeaderLink to="/token"> <Highlight color="blue">Manage</Highlight> </HeaderLink> */}

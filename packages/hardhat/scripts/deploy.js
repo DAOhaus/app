@@ -5,25 +5,33 @@ const { config, ethers, tenderly, run } = require("hardhat");
 const { utils } = require("ethers");
 const R = require("ramda");
 
-const accounts = [
-  "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  "0x956ecd469331426B1EA528e8291eEe87f74305b8",
-];
+/*
+
+ _______ _________ _______  _______
+(  ____ \\__   __/(  ___  )(  ____ )
+| (    \/   ) (   | (   ) || (    )|
+| (_____    | |   | |   | || (____)|
+(_____  )   | |   | |   | ||  _____)
+      ) |   | |   | |   | || (
+/\____) |   | |   | (___) || )
+\_______)   )_(   (_______)|/
+
+This deploy script is no longer in use, but is left for reference purposes!
+
+scaffold-eth now uses hardhat-deploy to manage deployments, see the /deploy folder
+And learn more here: https://www.npmjs.com/package/hardhat-deploy
+
+*/
 
 const main = async () => {
   console.log("\n\n 📡 Deploying...\n");
 
-  const onedayinseconds = 86400;
-  const Token = await deploy("Token", [
-    "LOCAL",
-    "L603M",
-    "https://johndangerstorey.com/resume.pdf",
-    [accounts[0], accounts[1]],
-    ["500000000000000000000000", "500000000000000000000000"],
-  ]);
+  const Token = await deploy("Token"); // <-- add in constructor args like line 19 vvvv
+  // use for local token bridging
+  // const mockToken = await deploy("MockERC20") // <-- add in constructor args like line 19 vvvv
 
-  // const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
-  // const secondContract = await deploy("SecondContract")
+  //const yourContract = await ethers.getContractAt('YourContract', "0xaAC799eC2d00C013f1F11c37E654e59B0429DF6A") //<-- if you want to instantiate a version of a contract at a specific address!
+  //const secondContract = await deploy("SecondContract")
 
   // const exampleToken = await deploy("ExampleToken")
   // const examplePriceOracle = await deploy("ExamplePriceOracle")
@@ -53,20 +61,11 @@ const main = async () => {
   });
   */
 
-  // If you want to verify your contract on tenderly.co (see setup details in the scaffold-eth README!)
+  //If you want to verify your contract on tenderly.co (see setup details in the scaffold-eth README!)
   /*
   await tenderlyVerify(
     {contractName: "YourContract",
      contractAddress: yourContract.address
-  })
-  */
-
-  // If you want to verify your contract on etherscan
-  /*
-  console.log(chalk.blue('verifying on etherscan'))
-  await run("verify:verify", {
-    address: yourContract.address,
-    // constructorArguments: args // If your contract has constructor arguments, you can pass them as an array
   })
   */
 
@@ -83,11 +82,11 @@ const deploy = async (
   overrides = {},
   libraries = {}
 ) => {
-  console.log(` 🛰  Deploying: ${contractName}`, _args, overrides, libraries);
+  console.log(` 🛰  Deploying: ${contractName}`);
 
   const contractArgs = _args || [];
   const contractArtifacts = await ethers.getContractFactory(contractName, {
-    libraries,
+    libraries: libraries,
   });
   const deployed = await contractArtifacts.deploy(...contractArgs, overrides);
   const encoded = abiEncodeArgs(deployed, contractArgs);
@@ -167,7 +166,7 @@ function sleep(ms) {
 
 // If you want to verify on https://tenderly.co/
 const tenderlyVerify = async ({ contractName, contractAddress }) => {
-  const tenderlyNetworks = [
+  let tenderlyNetworks = [
     "kovan",
     "goerli",
     "mainnet",
@@ -178,7 +177,7 @@ const tenderlyVerify = async ({ contractName, contractAddress }) => {
     "xDai",
     "POA",
   ];
-  const targetNetwork = process.env.HARDHAT_NETWORK || config.defaultNetwork;
+  let targetNetwork = process.env.HARDHAT_NETWORK || config.defaultNetwork;
 
   if (tenderlyNetworks.includes(targetNetwork)) {
     console.log(
@@ -192,17 +191,18 @@ const tenderlyVerify = async ({ contractName, contractAddress }) => {
       address: contractAddress,
     });
 
-    const verification = await tenderly.verify({
+    let verification = await tenderly.verify({
       name: contractName,
       address: contractAddress,
       network: targetNetwork,
     });
 
     return verification;
+  } else {
+    console.log(
+      chalk.grey(` 🧐 Contract verification not supported on ${targetNetwork}`)
+    );
   }
-  console.log(
-    chalk.grey(` 🧐 Contract verification not supported on ${targetNetwork}`)
-  );
 };
 
 main()

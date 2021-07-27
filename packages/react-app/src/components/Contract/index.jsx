@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
 import { Card } from "antd";
-import { useContractLoader, useContractExistsAtAddress } from "../../hooks";
+import React, { useMemo, useState } from "react";
+import { useContractExistsAtAddress, useContractLoader } from "../../hooks";
 import Account from "../Account";
 import DisplayVariable from "./DisplayVariable";
 import FunctionForm from "./FunctionForm";
@@ -52,12 +52,11 @@ export default function Contract({
   provider,
   name,
   show,
-  hideInputs,
-  hideCardTitle,
   price,
   blockExplorer,
+  chainId,
 }) {
-  const contracts = useContractLoader(provider);
+  const contracts = useContractLoader(provider, { chainId });
   let contract;
   if (!customContract) {
     contract = contracts ? contracts[name] : "";
@@ -116,7 +115,7 @@ export default function Contract({
     <div>
       <Card
         title={
-          !hideCardTitle && <div>
+          <div>
             {name}
             <div style={{ float: "right" }}>
               <Account

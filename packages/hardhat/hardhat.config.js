@@ -5,7 +5,10 @@ const chalk = require("chalk");
 require("@nomiclabs/hardhat-waffle");
 require("@tenderly/hardhat-tenderly");
 
-require("@nomiclabs/hardhat-etherscan");
+require("hardhat-deploy");
+
+require("@eth-optimism/hardhat-ovm");
+require("@nomiclabs/hardhat-ethers");
 
 const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 
@@ -41,9 +44,9 @@ function mnemonic(extension) {
     return fs.readFileSync(mnemon).toString().trim();
   } catch (e) {
     if (defaultNetwork !== "localhost") {
-      // console.log(
-      //   "☢️ WARNING: No mnemonic file created for a deploy account. Try `yarn run generate` and then `yarn run account`."
-      // );
+      console.log(
+        "☢️ WARNING: No mnemonic file created for a deploy account. Try `yarn run generate` and then `yarn run account`."
+      );
     }
   }
   return "";
@@ -69,31 +72,31 @@ module.exports = {
       */
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://rinkeby.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic("abba"),
       },
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic("abba"),
       },
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://ropsten.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     goerli: {
-      url: "https://goerli.infura.io/v3/b1ea48079f864e3ab68dacaf17902201", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://goerli.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
@@ -112,11 +115,73 @@ module.exports = {
         mnemonic: mnemonic(),
       },
     },
+    rinkebyArbitrum: {
+      url: "https://rinkeby.arbitrum.io/rpc",
+      gasPrice: 0,
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+      companionNetworks: {
+        l1: "rinkeby",
+      },
+    },
+    localArbitrum: {
+      url: "http://localhost:8547",
+      gasPrice: 0,
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+      companionNetworks: {
+        l1: "localArbitrumL1",
+      },
+    },
+    localArbitrumL1: {
+      url: "http://localhost:7545",
+      gasPrice: 0,
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+      companionNetworks: {
+        l2: "localArbitrum",
+      },
+    },
+    kovanOptimism: {
+      url: "https://kovan.optimism.io",
+      gasPrice: 0,
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+      ovm: true,
+      companionNetworks: {
+        l1: "kovan",
+      },
+    },
+    localOptimism: {
+      url: "http://localhost:8545",
+      gasPrice: 0,
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+      ovm: true,
+      companionNetworks: {
+        l1: "localOptimismL1",
+      },
+    },
+    localOptimismL1: {
+      url: "http://localhost:9545",
+      gasPrice: 0,
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+      companionNetworks: {
+        l2: "localOptimism",
+      },
+    },
   },
   solidity: {
     compilers: [
       {
-        version: "0.8.0",
+        version: "0.5.2",
         settings: {
           optimizer: {
             enabled: true,
@@ -125,7 +190,7 @@ module.exports = {
         },
       },
       {
-        version: "0.7.6",
+        version: "0.8.4",
         settings: {
           optimizer: {
             enabled: true,
@@ -142,30 +207,15 @@ module.exports = {
           },
         },
       },
-      {
-        version: "0.6.2",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
-      {
-        version: "0.5.3",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
     ],
   },
-  etherscan: {
-    // Your API key for Etherscan
-    // Obtain one at https://etherscan.io/
-    apiKey: "PSW8C433Q667DVEX5BCRMGNAH9FSGFZ7Q8",
+  ovm: {
+    solcVersion: "0.7.6",
+  },
+  namedAccounts: {
+    deployer: {
+      default: 0, // here this will by default take the first account as deployer
+    },
   },
 };
 
@@ -194,7 +244,7 @@ task("fundedwallet", "Create a wallet (pk) link and fund it with deployer?")
     const randomWallet = ethers.Wallet.createRandom();
     const privateKey = randomWallet._signingKey().privateKey;
     console.log("🔐 WALLET Generated as " + randomWallet.address + "");
-    const url = taskArgs.url ? taskArgs.url : "http://localhost:3000";
+    let url = taskArgs.url ? taskArgs.url : "http://localhost:3000";
 
     let localDeployerMnemonic;
     try {
@@ -204,7 +254,7 @@ task("fundedwallet", "Create a wallet (pk) link and fund it with deployer?")
       /* do nothing - this file isn't always there */
     }
 
-    const amount = taskArgs.amount ? taskArgs.amount : "0.01";
+    let amount = taskArgs.amount ? taskArgs.amount : "0.01";
     const tx = {
       to: randomWallet.address,
       value: ethers.utils.parseEther(amount),
@@ -224,8 +274,9 @@ task("fundedwallet", "Create a wallet (pk) link and fund it with deployer?")
           randomWallet.address +
           " using deployer account"
       );
-      const sendresult = await deployerWallet.sendTransaction(tx);
+      let sendresult = await deployerWallet.sendTransaction(tx);
       console.log("\n" + url + "/pk#" + privateKey + "\n");
+      return;
     } else {
       console.log(
         "💵 Sending " +
@@ -252,12 +303,12 @@ task(
     const hdwallet = hdkey.fromMasterSeed(seed);
     const wallet_hdpath = "m/44'/60'/0'/0/";
     const account_index = 0;
-    const fullPath = wallet_hdpath + account_index;
+    let fullPath = wallet_hdpath + account_index;
     if (DEBUG) console.log("fullPath", fullPath);
     const wallet = hdwallet.derivePath(fullPath).getWallet();
     const privateKey = "0x" + wallet._privKey.toString("hex");
     if (DEBUG) console.log("privateKey", privateKey);
-    const EthUtil = require("ethereumjs-util");
+    var EthUtil = require("ethereumjs-util");
     const address =
       "0x" + EthUtil.privateToAddress(wallet._privKey).toString("hex");
     console.log(
@@ -295,29 +346,29 @@ task(
       const hdwallet = hdkey.fromMasterSeed(seed);
       const wallet_hdpath = "m/44'/60'/0'/0/";
       const account_index = 0;
-      const fullPath = wallet_hdpath + account_index;
+      let fullPath = wallet_hdpath + account_index;
       if (DEBUG) console.log("fullPath", fullPath);
       const wallet = hdwallet.derivePath(fullPath).getWallet();
       const privateKey = "0x" + wallet._privKey.toString("hex");
       if (DEBUG) console.log("privateKey", privateKey);
-      const EthUtil = require("ethereumjs-util");
+      var EthUtil = require("ethereumjs-util");
       address =
         "0x" + EthUtil.privateToAddress(wallet._privKey).toString("hex");
 
       const rlp = require("rlp");
       const keccak = require("keccak");
 
-      const nonce = 0x00; // The nonce must be a hex literal!
-      const sender = address;
+      let nonce = 0x00; //The nonce must be a hex literal!
+      let sender = address;
 
-      const input_arr = [sender, nonce];
-      const rlp_encoded = rlp.encode(input_arr);
+      let input_arr = [sender, nonce];
+      let rlp_encoded = rlp.encode(input_arr);
 
-      const contract_address_long = keccak("keccak256")
+      let contract_address_long = keccak("keccak256")
         .update(rlp_encoded)
         .digest("hex");
 
-      contract_address = contract_address_long.substring(24); // Trim the first 24 characters.
+      contract_address = contract_address_long.substring(24); //Trim the first 24 characters.
     }
 
     console.log(
@@ -346,32 +397,32 @@ task(
   async (_, { ethers }) => {
     const hdkey = require("ethereumjs-wallet/hdkey");
     const bip39 = require("bip39");
-    const mnemonic = fs.readFileSync("./mnemonic.txt").toString().trim();
+    let mnemonic = fs.readFileSync("./mnemonic.txt").toString().trim();
     if (DEBUG) console.log("mnemonic", mnemonic);
     const seed = await bip39.mnemonicToSeed(mnemonic);
     if (DEBUG) console.log("seed", seed);
     const hdwallet = hdkey.fromMasterSeed(seed);
     const wallet_hdpath = "m/44'/60'/0'/0/";
     const account_index = 0;
-    const fullPath = wallet_hdpath + account_index;
+    let fullPath = wallet_hdpath + account_index;
     if (DEBUG) console.log("fullPath", fullPath);
     const wallet = hdwallet.derivePath(fullPath).getWallet();
     const privateKey = "0x" + wallet._privKey.toString("hex");
     if (DEBUG) console.log("privateKey", privateKey);
-    const EthUtil = require("ethereumjs-util");
+    var EthUtil = require("ethereumjs-util");
     const address =
       "0x" + EthUtil.privateToAddress(wallet._privKey).toString("hex");
 
-    const qrcode = require("qrcode-terminal");
+    var qrcode = require("qrcode-terminal");
     qrcode.generate(address);
     console.log("‍📬 Deployer Account is " + address);
-    for (const n in config.networks) {
-      // console.log(config.networks[n],n)
+    for (let n in config.networks) {
+      //console.log(config.networks[n],n)
       try {
-        const provider = new ethers.providers.JsonRpcProvider(
+        let provider = new ethers.providers.JsonRpcProvider(
           config.networks[n].url
         );
-        const balance = await provider.getBalance(address);
+        let balance = await provider.getBalance(address);
         console.log(" -- " + n + " --  -- -- 📡 ");
         console.log("   balance: " + ethers.utils.formatEther(balance));
         console.log(

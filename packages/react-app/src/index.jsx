@@ -1,10 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import "./index.css";
-import "semantic-ui-css/semantic.min.css";
+import React from "react";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
+import ReactDOM from "react-dom";
 import App from "./App";
+import "./index.css";
 
 const themes = {
   dark: `${process.env.PUBLIC_URL}/dark-theme.css`,
