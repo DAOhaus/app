@@ -4,7 +4,7 @@ import { useContractExistsAtAddress, useContractLoader } from "../../hooks";
 import Account from "../Account";
 import DisplayVariable from "./DisplayVariable";
 import FunctionForm from "./FunctionForm";
-import { indexOf } from "contracts/Token.abi";
+// import { indexOf } from "contracts/Token.abi";
 
 const noContractDisplay = (
   <div>
