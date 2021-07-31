@@ -21,7 +21,7 @@ import {
   useUserSigner,
 } from "./hooks";
 // import Hints from "./Hints";
-import { ExampleUI, Hints, Subgraph } from "./views";
+import { ExampleUI, Hints, Subgraph, Landing, Explore, Mint } from "./views";
 
 const { ethers } = require("ethers");
 /*
@@ -447,23 +447,30 @@ function App(props) {
                 and give you a form to interact with it locally
             */}
 
+            <Landing/>
+          </Route>
+          <Route path="/mint">
+            <Mint
+            />
+          </Route>
+          <Route path="/explore">
+            <Explore
+            />
+          </Route>
+          <Route path="/contracts">
             <Contract
-              name="YourContract"
+              name="DAI"
+              customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.DAI}
               signer={userSigner}
-              provider={localProvider}
+              provider={mainnetProvider}
               address={address}
-              blockExplorer={blockExplorer}
+              blockExplorer="https://etherscan.io/"
             />
+
           </Route>
-          <Route path="/hints">
-            <Hints
-              address={address}
-              yourLocalBalance={yourLocalBalance}
-              mainnetProvider={mainnetProvider}
-              price={price}
-            />
-          </Route>
-          <Route path="/exampleui">
+
+
+          {/*<Route path="/exampleui">
             <ExampleUI
               address={address}
               userSigner={userSigner}
@@ -477,16 +484,16 @@ function App(props) {
               purpose={purpose}
               setPurposeEvents={setPurposeEvents}
             />
-          </Route>
-          <Route path="/mainnetdai">
-            <Contract
+          </Route> */}
+          {/* <Route path="/mainnetdai"> */}
+            {/* <Contract
               name="DAI"
               customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.DAI}
               signer={userSigner}
               provider={mainnetProvider}
               address={address}
               blockExplorer="https://etherscan.io/"
-            />
+            /> */}
             {/*
             <Contract
               name="UNI"
@@ -497,15 +504,15 @@ function App(props) {
               blockExplorer="https://etherscan.io/"
             />
             */}
-          </Route>
-          <Route path="/subgraph">
+          {/* </Route> */}
+          {/* <Route path="/subgraph">
             <Subgraph
               subgraphUri={props.subgraphUri}
               tx={tx}
               writeContracts={writeContracts}
               mainnetProvider={mainnetProvider}
             />
-          </Route>
+          </Route> */}
         </Switch>
       </BrowserRouter>
 
@@ -528,7 +535,7 @@ function App(props) {
       </div> */}
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
+      { /*<div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Row align="middle" gutter={[4, 4]}>
           <Col span={8}>
             <Ramp price={price} address={address} networks={NETWORKS} />
@@ -556,7 +563,7 @@ function App(props) {
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
             {
-              /*  if the local provider has a signer, let's show the faucet:  */
+              //  if the local provider has a signer, let's show the faucet: 
               faucetAvailable ? (
                 <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
               ) : (
@@ -565,7 +572,7 @@ function App(props) {
             }
           </Col>
         </Row>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -29,9 +29,10 @@ export default function Header({address,logoutOfWeb3Modal, loadWeb3Modal, userPr
     <div className="header flex justify-content-between align-items-center p20 text-align-left" style={{ borderBottom: "1px solid lightGray" }}>
 
       <div>
-        <span className="mr20 font-size-30">
+
+        <HeaderLink to="/" className="mr20 font-size-30">
           <img src={logo} className="w50" alt="balance" />
-        </span>
+        </HeaderLink>
         <HeaderLink to="/mint"> <Highlight color="red">Mint</Highlight> </HeaderLink>
         {/* <HeaderLink to="/token"> <Highlight color="blue">Manage</Highlight> </HeaderLink> */}
         <HeaderLink to="/explore"> <Highlight color="yellow">Explore</Highlight> </HeaderLink>
