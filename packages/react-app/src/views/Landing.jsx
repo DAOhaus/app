@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from '../static/logo.png'
-import "bootstrap-css"
 import '../Landing.css'
 
 function App() {
