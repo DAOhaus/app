@@ -58,11 +58,9 @@ export default function CustomHeader({ address, logoutOfWeb3Modal, loadWeb3Modal
               {shortenAddress(address)}
               <NetworkName>{`on ${networkName === "homestead" ? "mainnet" : networkName} network`}</NetworkName>
             </div> 
-            : !userProvider 
-              ? <div /> 
-              : <Button primary onClick={loadWeb3Modal}>
+            : <Button primary onClick={loadWeb3Modal}>
                   Connect Wallet
-              </Button> 
+            </Button> 
           }
         </div>
         <Dropdown button color="white" className="icon" icon="cog">

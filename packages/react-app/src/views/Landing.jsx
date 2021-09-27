@@ -1,17 +1,58 @@
-import React from 'react'
+import React, {useState} from 'react'
 import logo from '../static/logo.png'
+import { Accordion, Icon } from 'semantic-ui-react'
 import '../Landing.css'
 
 function App() {
+  const [openState, setOpenState] = useState({activeIndex: 2})
+  const { activeIndex } = openState
+
+
+  const handleClick = (e, titleProps) => {
+    const { index } = titleProps
+    const newIndex = activeIndex ===  index
+    setOpenState({ activeIndex: newIndex })
+  }
+
+
   return (  
     <div className="full-screen-center ">
       <div className="section jumbotron" style={{paddingTop: 80}}>
         <img src={logo} alt="logo" style={{width: 80, marginBottom: 15}}/>
         <h1 className="strong">daohaus</h1>
         <p className="jumbotron-desc">
-          rebuilding democracy, one house at a time<br/> read the <a target="_blank" href="https://github.com/daohaus/paper">white paper</a>      and subscribe for updates:
+          empowering creative collective construction
+          through an ecosystem of decentralized tools
+          [] LEGT 
+          [] LEGIQUITY
+          [] AIRBNB NFT DAO
         </p>
       </div>
+      {/* <Accordion>
+        <Accordion.Title
+          active={activeIndex === 0}
+          index={0}
+          onClick={handleClick}
+        >
+          <Icon name='dropdown' />
+          First
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === 0}>
+          <p> First Desc</p>
+        </Accordion.Content>
+
+        <Accordion.Title
+          active={activeIndex === 1}
+          index={1}
+          onClick={handleClick}
+        >
+          <Icon name='dropdown' />
+          Second
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === 1}>
+          <p>Second Descr</p>
+        </Accordion.Content>
+      </Accordion> */}
       <div className="section text-align-left">
         <ul className="timeline">
           <li className="timeline-event">

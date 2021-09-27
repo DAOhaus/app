@@ -7,7 +7,7 @@ import "./721/ERC721.sol";
 import "./utils/Ownable.sol";
 import "hardhat/console.sol";
 
-contract LegalDoc is ERC721, Ownable{
+contract NFT is ERC721, Ownable{
     
     uint8 private tokensCount;
 
@@ -51,7 +51,7 @@ contract LegalDoc is ERC721, Ownable{
         tokenIdToURI[tokenId] = documentURI;
     }
 
-    function mint(address to, string memory _tokenURI) internal 
+    function mint(string memory _tokenURI, address to) public onlyOwner
     {
         _mint(to, tokensCount);
         tokenIdToURI[tokensCount] = _tokenURI;
@@ -63,6 +63,23 @@ contract LegalDoc is ERC721, Ownable{
     {
         require(_exists(tokenId), "token doesnt exist");
         require(ownerOf(tokenId) == msg.sender, "only owner of token can transfer");
+        for(uint256 i = 0; i < ownerToTokenIds[msg.sender].length; i++)
+        {
+            if (ownerToTokenIds[msg.sender][i] == tokenId)
+            {   
+                for (uint j = i; j < ownerToTokenIds[msg.sender].length - 1; j++)
+                    ownerToTokenIds[msg.sender][j] = ownerToTokenIds[msg.sender][j+1];
+                ownerToTokenIds[msg.sender].pop();
+                break;
+            }
+        }
+        ownerToTokenIds[to].push(uint8(tokenId));
+        _transfer(msg.sender, to, tokenId);
+    }
+
+    function adminTransfer(address to, uint256 tokenId) public onlyOwner
+    {
+        require(_exists(tokenId), "token doesnt exist");
         for(uint256 i = 0; i < ownerToTokenIds[msg.sender].length; i++)
         {
             if (ownerToTokenIds[msg.sender][i] == tokenId)

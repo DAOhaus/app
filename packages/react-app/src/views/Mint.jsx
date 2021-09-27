@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Input, Button } from "semantic-ui-react";
 
-export default props => {
+export default ({userProvider, contracts, tx}) => {
+  console.log('!', contracts)
+  // const contractConfig = useContractConfig();
+  // const readContracts = useContractLoader(userProvider, contractConfig);
   const [url, setUrl] = useState();
   const handleClick = () => {
-    window.alert(`web3 tx here with ${url}`);
+    // window.alert(`web3 tx here with ${url}`);
+    tx(contracts.NFT.mint(url));
   };
   return (
     <div className="flex justify-content-center mauto w300 mt20">

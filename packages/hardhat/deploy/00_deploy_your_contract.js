@@ -5,19 +5,19 @@
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
-  await deploy("YourContract", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    // args: [ "Hello", ethers.utils.parseEther("1.5") ],
-    log: true,
-  });
+  // await deploy("YourContract", {
+  //   // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+  //   from: deployer,
+  //   // args: [ "Hello", ethers.utils.parseEther("1.5") ],
+  //   log: true,
+  // });
 
   await deploy("Token", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
-      "GenCoin",
-      "GEN",
+      "LEGT20",
+      "123 East Street",
       "",
       ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
       [20],
@@ -25,23 +25,23 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     log: true,
   });
 
-  await deploy("MultiToken", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    args: [
-      "Daohaus",
-      "haus",
-      "",
-      ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-      [5000],
-    ],
-    log: true,
-  });
+  // await deploy("MultiToken", {
+  //   // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+  //   from: deployer,
+  //   args: [
+  //     "Daohaus",
+  //     "haus",
+  //     "",
+  //     ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
+  //     [5000],
+  //   ],
+  //   log: true,
+  // });
 
-  await deploy("LegalDoc", {
+  await deploy("NFT", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: ["LegalDocs", "legt"],
+    args: ["NFT w/ ADMIN", "LEGT-NFT"],
     log: true,
   });
 

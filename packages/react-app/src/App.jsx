@@ -190,8 +190,8 @@ function App(props) {
   const gasPrice = useGasPrice(targetNetwork, "fast");
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
   const userProviderAndSigner = useUserProviderAndSigner(injectedProvider);
-  console.log('!!', injectedProvider)
   const userSigner = userProviderAndSigner.signer;
+  const userProvider = userSigner?.provider
 
   useEffect(() => {
     async function getAddress() {
@@ -450,7 +450,7 @@ function App(props) {
           address={address}
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           loadWeb3Modal={loadWeb3Modal}
-          userProvider={userSigner?.provider}
+          userProvider={userProvider}
         />
         {/* 
         <Menu style={{ textAlign: "center" }} selectedKeys={[route]} mode="horizontal">
@@ -516,20 +516,33 @@ function App(props) {
             <Landing />
           </Route>
           <Route path="/mint">
-            <Mint />
+            <Mint
+              userProvider={userProvider} 
+              contracts={writeContracts}
+            />
           </Route>
           <Route path="/explore">
             <Explore />
           </Route>
           <Route path="/contracts">
-            <Contract
-              name="LegalDoc"
-              signer={userSigner}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-              contractConfig={contractConfig}
-            />
+            <div className="flex">
+              <Contract
+                name="NFT"
+                signer={userSigner}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+                contractConfig={contractConfig}
+              />
+              <Contract
+                name="Token"
+                signer={userSigner}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+                contractConfig={contractConfig}
+              />
+            </div>
           </Route>
           {/* <Route path="/exampleui">
             <ExampleUI
