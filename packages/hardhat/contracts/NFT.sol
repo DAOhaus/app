@@ -25,7 +25,7 @@ contract NFT is ERC721, Ownable{
 
     function createDocument(string memory _documentLink) public 
     {
-        mint(msg.sender, _documentLink);
+        mint(_documentLink, msg.sender);
     }
 
     function myDocuments() public view returns(uint8[] memory)
