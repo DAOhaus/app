@@ -518,7 +518,9 @@ function App(props) {
           <Route path="/mint">
             <Mint
               userProvider={userProvider} 
-              contracts={writeContracts}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
             />
           </Route>
           <Route path="/explore">
