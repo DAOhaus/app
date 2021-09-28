@@ -526,22 +526,26 @@ function App(props) {
           </Route>
           <Route path="/contracts">
             <div className="flex">
-              <Contract
-                name="NFT"
-                signer={userSigner}
-                provider={localProvider}
-                address={address}
-                blockExplorer={blockExplorer}
-                contractConfig={contractConfig}
-              />
-              <Contract
-                name="Token"
-                signer={userSigner}
-                provider={localProvider}
-                address={address}
-                blockExplorer={blockExplorer}
-                contractConfig={contractConfig}
-              />
+              <div>
+                <Contract
+                  name="NFT"
+                  signer={userSigner}
+                  provider={localProvider}
+                  address={address}
+                  blockExplorer={blockExplorer}
+                  contractConfig={contractConfig}
+                />
+              </div>
+              <div>
+                <Contract
+                  name="Token"
+                  signer={userSigner}
+                  provider={localProvider}
+                  address={address}
+                  blockExplorer={blockExplorer}
+                  contractConfig={contractConfig}
+                />
+              </div>
             </div>
           </Route>
           {/* <Route path="/exampleui">
