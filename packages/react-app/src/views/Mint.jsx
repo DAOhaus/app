@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Tab, List, Radio,Loader, Dimmer, Segment, Image } from "semantic-ui-react";
+import { Input, Button, Tab, List, Radio,Loader, Dimmer, Segment, Modal } from "semantic-ui-react";
 import {useContractReader} from "eth-hooks";
 
 export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   const [url, setUrl] = useState();
+
   const [tokenListReady, setTokenListReady] = useState(false);
   const [tokenList, setTokenList] = useState([]);
+  const [newUrl, setNewUrl] = useState("")
   const [searchBy, setSearchBy] = useState("owner");
   const [searchQuery, setSearchQuery] = useState("");
   const [searching, setSearching] = useState(0); // 0 for initial // 1 for searching // 2 for done searching
   const [searchResults, setSearchResults] = useState([]); // 0 for initial // 1 for searching // 2 for done searching
 
-  let tokenIdsList = useContractReader(readContracts, "NFT", "getOwnerToTokenIds", [address]);
+  const tokenIdsList = useContractReader(readContracts, "NFT", "getOwnerToTokenIds", [address],1000);
 
   const getTokenList = ()=>
   {
@@ -69,7 +71,7 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
       menuItem : "Mint an NFT",
       render : () =>
         <Tab.Pane>
-          <Input className="" onChange={e => setUrl(e.target.value)} placeholder="NFT URL" value={url} />
+          <Input onChange={e => setUrl(e.target.value)} placeholder="NFT URL" value={url} />
           <Button primary onClick={handleClick}>
             Deploy
           </Button>
@@ -85,10 +87,28 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
               tokenList.map((token)=>{
                 return (
                   <List.Item >
+                    <List.Content floated='right'>
+                      <Modal
+                        trigger={<Button>Edit</Button>}
+                        header={'Enter new tokenURI for NFT #'+token.id}
+                        content={          
+                          <Input style={{width:"90%",margin:"10px 5%"}} value={newUrl} onChange={e => setNewUrl(e.target.value)} placeholder="new uri"/>
+                        }
+                        actions={[
+                          {content: 'Cancel',onClick:(e,data)=>{setNewUrl("")}},
+                          {content: 'Update URI',
+                            onClick:async(e,data)=>{
+                              await tx(writeContracts.NFT.setTokenURI(token.id, newUrl));
+                              setNewUrl("");
+                            }}]}
+                        size="tiny"
+                      />
+                    </List.Content>
                     <List.Header as='a' style={{textDecoration:"none"}}>NFT #{token.id}</List.Header>
                     <List.Description >
                       Document URI : <a style={{textDecoration:"none", textAlign:"left"}} href={token.uri}>{token.uri}</a>
                     </List.Description>
+
                   </List.Item>
                 );
               })

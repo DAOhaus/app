@@ -33,8 +33,9 @@ contract NFT is ERC721, Ownable{
         return tokenIdToURI[_tokenId];
     }
 
-    function setDocumentURI(uint256 tokenId, string memory documentURI) public  onlyOwner {
+    function setTokenURI(uint256 tokenId, string memory documentURI) public {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(ownerOf(tokenId) == msg.sender, "Only owner of token can update URI");
 
         delete tokenIdToURI[tokenId];
         tokenIdToURI[tokenId] = documentURI;
