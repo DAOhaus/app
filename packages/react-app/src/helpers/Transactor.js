@@ -28,8 +28,6 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
         network = await providerOrSigner.getNetwork();
       }
 
-      console.log("network", network);
-
       let options = null;
       let notify = null;
       if (navigator.onLine) {
@@ -44,6 +42,7 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
             if (typeof possibleFunction === "function") {
               possibleFunction(txInformation.transaction);
             }
+            console.log('tx handler', possibleFunction)
           },
         };
 
@@ -102,18 +101,19 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
           if (callback) {
             const txResult = await tx;
             const listeningInterval = setInterval(async () => {
-              console.log("CHECK IN ON THE TX", txResult, provider);
               const currentTransactionReceipt = await provider.getTransactionReceipt(txResult.hash);
+              console.log("!CHECK IN ON THE TX", txResult, provider, currentTransactionReceipt);
               if (currentTransactionReceipt && currentTransactionReceipt.confirmations) {
                 callback({ ...txResult, ...currentTransactionReceipt });
                 clearInterval(listeningInterval);
-              }
+              } 
             }, 500);
           }
         }
 
         if (typeof result.wait === "function") {
-          await result.wait();
+          console.log('!await', result.wait)
+          await result.wait(console.log);
         }
 
         return result;

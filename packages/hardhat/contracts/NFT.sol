@@ -23,6 +23,11 @@ contract NFT is ERC721, Ownable{
         tokensCount = 0;
     }
 
+    function getOwnerToTokenIds(address owner) public returns(uint8[] memory)
+    {   
+        return ownerToTokenIds[owner];
+    }
+
     function setDocumentURI(uint256 tokenId, string memory documentURI) public  onlyOwner {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
@@ -30,11 +35,11 @@ contract NFT is ERC721, Ownable{
         tokenIdToURI[tokenId] = documentURI;
     }
 
-    function mint(address to, string memory _tokenURI) public onlyOwner
+    function mint(string memory _tokenURI) public onlyOwner
     {   
-        _mint(to, tokensCount);
+        _mint(msg.sender, tokensCount);
         tokenIdToURI[tokensCount] = _tokenURI;
-        ownerToTokenIds[to].push(tokensCount);
+        ownerToTokenIds[msg.sender].push(tokensCount);
         tokensCount++;
     }
 
@@ -54,4 +59,5 @@ contract NFT is ERC721, Ownable{
         ownerToTokenIds[to].push(uint8(tokenId));
         _transfer(msg.sender, to, tokenId);
     }
+
 }

@@ -24,7 +24,6 @@ const NetworkName = styled.div`
 
 export default function CustomHeader({ address, logoutOfWeb3Modal, loadWeb3Modal, userProvider }) {
   const networkName = userProvider?._network?.name;
-  console.log('!', userProvider)
 
   return (
     <div

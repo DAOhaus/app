@@ -14,18 +14,25 @@ async function getTokenUris(readContracts,arr)
   return []
 }
 
-export default ({userProvider, writeContracts,readContracts, tx}) => {
-  console.log('!', writeContracts)
-  // const contractConfig = useContractConfig();
-  // const readContracts = useContractLoader(userProvider, contractConfig);
+export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   const [url, setUrl] = useState();
   const [tokenListReady, setTokenListReady] = useState(false);
+  const updateTokenList = () => {
+    const tokenIds = readContracts.NFT.ownerToTokenIds(address)
+    console.log('!', tokenIds)
+  }
 
 
-  const handleClick = () => {
-    // window.alert(`web3 tx here with ${url}`);
-    tx(writeContracts.NFT.createDocument(url));
+
+  const handleMintCallback = (props) => {
+    console.log('!', props)
+  }
+
+  const handleClick = async () => {
+    const promise = await tx(writeContracts.NFT.mint(url), handleMintCallback);
+    console.log('!promise', promise) 
   };
+
 
   const panes = [
     {

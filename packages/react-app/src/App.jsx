@@ -518,6 +518,7 @@ function App(props) {
           <Route path="/mint">
             <Mint
               userProvider={userProvider} 
+              address={address}
               writeContracts={writeContracts}
               readContracts={readContracts}
               tx={tx}
@@ -527,17 +528,15 @@ function App(props) {
             <Explore />
           </Route>
           <Route path="/contracts">
-            <div className="flex">
-              <div>
-                <Contract
-                  name="NFT"
-                  signer={userSigner}
-                  provider={localProvider}
-                  address={address}
-                  blockExplorer={blockExplorer}
-                  contractConfig={contractConfig}
-                />
-              </div>
+            <div className="flex p20">
+              <Contract
+                name="NFT"
+                signer={userSigner}
+                provider={localProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+                contractConfig={contractConfig}
+              />
               <div>
                 <Contract
                   name="Token"
