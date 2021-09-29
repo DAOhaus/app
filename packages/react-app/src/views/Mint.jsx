@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Tab, List } from "semantic-ui-react";
+import { Input, Button, Tab, List, Radio,Loader, Dimmer, Segment, Image } from "semantic-ui-react";
 import {useContractReader} from "eth-hooks";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   const [url, setUrl] = useState();
   const [tokenListReady, setTokenListReady] = useState(false);
   const [tokenList, setTokenList] = useState([]);
+  const [searchBy, setSearchBy] = useState("owner");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searching, setSearching] = useState(0); // 0 for initial // 1 for searching // 2 for done searching
+  const [searchResults, setSearchResults] = useState([]); // 0 for initial // 1 for searching // 2 for done searching
 
   let tokenIdsList = useContractReader(readContracts, "NFT", "getOwnerToTokenIds", [address]);
 
@@ -45,12 +48,28 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
     console.log('!promise', promise) 
   };
 
+  const handleSearch = async () =>    
+  {
+    setSearching(1);
+    let tokenIds = []
+    if (searchBy === "tokenID")
+      tokenIds.push(parseInt(searchQuery));
+    else if(searchBy === "owner")
+      tokenIds = await readContracts.NFT.getOwnerToTokenIds(searchQuery);
+    let list = tokenIds.map(async (id)=>{
+      return {id: id, uri: await readContracts.NFT.tokenURI(id)}
+    });
+    Promise.all(list).then(res=>{
+      setSearchResults(res);
+      setSearching(2);
+    })
+  }
   const panes = [
     {
       menuItem : "Mint an NFT",
       render : () =>
         <Tab.Pane>
-          <Input className="mb10" onChange={e => setUrl(e.target.value)} placeholder="NFT URL" value={url} />
+          <Input className="" onChange={e => setUrl(e.target.value)} placeholder="NFT URL" value={url} />
           <Button primary onClick={handleClick}>
             Deploy
           </Button>
@@ -77,10 +96,62 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
           </List>
         </Tab.Pane>
     },
+    {
+      menuItem : "Search",
+      render : () =>
+        <Tab.Pane>
+          <Radio
+            className="mb10"
+            label='By owner'
+            value='owner'
+            checked={searchBy === 'owner'}
+            onChange={(e, { value }) => setSearchBy(value)}
+          />
+          <br/>
+          <Radio 
+            className="mb10"
+            label='By tokenID'
+            value='tokenID'
+            checked={searchBy === 'tokenID'}
+            onChange={(e, { value }) => setSearchBy(value)}
+          />
+          <br/>
+          <Input className="mb10" onChange={e => setSearchQuery(e.target.value)} placeholder={searchBy} value={searchQuery} />
+
+          <Button primary onClick={handleSearch}>
+            Search
+          </Button>
+
+          <Segment style={{minHeight:"100px"}}>
+            {searching == 1 && 
+              <Dimmer active inverted >
+                <Loader inverted active>Loading</Loader>
+              </Dimmer>
+            }
+            {searching == 2 && 
+              <List celled >
+                {
+                  searchResults.map((token)=>{
+                    let i=0;
+                    return (
+                      <List.Item key={i++}>
+                        <List.Header as='a' style={{textDecoration:"none"}}>NFT #{token.id}</List.Header>
+                        <List.Description >
+                          Document URI : <a style={{textDecoration:"none", textAlign:"left"}} href={token.uri}>{token.uri}</a>
+                        </List.Description>
+                      </List.Item>
+                    );
+                  })
+                } 
+              </List>
+            }
+          </Segment>
+        </Tab.Pane>
+    },
   ]
   return (
-    <div className="flex justify-content-center mauto w300 mt20">
-      <div className=" flex column">
+    <div className="flex justify-content-center mauto w500 mt20">
+      <div className="flex column">
         <Tab panes={panes}/>
       </div>
     </div>
