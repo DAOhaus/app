@@ -5,7 +5,6 @@ pragma solidity ^0.8.0;
 
 import "./721/ERC721.sol";
 import "./utils/Ownable.sol";
-import "hardhat/console.sol";
 
 contract NFT is ERC721, Ownable{
     
@@ -23,9 +22,15 @@ contract NFT is ERC721, Ownable{
         tokensCount = 0;
     }
 
-    function getOwnerToTokenIds(address owner) public returns(uint8[] memory)
+    function getOwnerToTokenIds(address owner) public view returns(uint8[] memory)
     {   
         return ownerToTokenIds[owner];
+    }
+
+    function tokenURI(uint256 _tokenId) public view override returns (string memory)
+    {
+        require(_exists(_tokenId), "ERC721Metadata: URI query for nonexistent token");
+        return tokenIdToURI[_tokenId];
     }
 
     function setDocumentURI(uint256 tokenId, string memory documentURI) public  onlyOwner {

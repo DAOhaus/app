@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Tab } from "semantic-ui-react";
+import { Input, Button, Tab, List } from "semantic-ui-react";
 import {useContractReader} from "eth-hooks";
-
-
-async function getTokenUris(readContracts,arr)
-{
-  this.uri;
-  if(arr && arr.map)
-    return arr.map((e)=>{
-      readContracts.NFT.tokenURI(e).then(val => {this.uri = val;})
-      return {id:e,uri:this.uri};
-    });
-  return []
-}
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   const [url, setUrl] = useState();
   const [tokenListReady, setTokenListReady] = useState(false);
-  const updateTokenList = () => {
-    const tokenIds = readContracts.NFT.ownerToTokenIds(address)
-    console.log('!', tokenIds)
+  const [tokenList, setTokenList] = useState([]);
+
+  let tokenIdsList = useContractReader(readContracts, "NFT", "getOwnerToTokenIds", [address]);
+
+  const getTokenList = ()=>
+  {
+    if(tokenIdsList )
+    {
+      let arr = [];
+      for (let id in tokenIdsList)
+        arr.push(readContracts.NFT.tokenURI(id));
+      Promise.all(arr).then((res)=>{
+        let i = -1;
+        let list = tokenIdsList.map((id)=>{
+          return {id:id,uri:res[++i]}
+        });
+        setTokenList(list);
+        setTokenListReady(true);
+      })
+    }
   }
 
+  useEffect(()=>{
+    getTokenList()
+  },[tokenIdsList])
 
+  useEffect(()=>{
+    getTokenList()
+  },[])
 
   const handleMintCallback = (props) => {
     console.log('!', props)
@@ -32,7 +44,6 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
     const promise = await tx(writeContracts.NFT.mint(url), handleMintCallback);
     console.log('!promise', promise) 
   };
-
 
   const panes = [
     {
@@ -49,6 +60,21 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
       menuItem : "My tokens",
       render : () =>
         <Tab.Pane loading={!tokenListReady}>
+          {/* {JSON.stringify(tokenList)} */}
+          <List celled >
+            {
+              tokenList.map((token)=>{
+                return (
+                  <List.Item >
+                    <List.Header as='a' style={{textDecoration:"none"}}>NFT #{token.id}</List.Header>
+                    <List.Description >
+                      Document URI : <a style={{textDecoration:"none", textAlign:"left"}} href={token.uri}>{token.uri}</a>
+                    </List.Description>
+                  </List.Item>
+                );
+              })
+            } 
+          </List>
         </Tab.Pane>
     },
   ]
