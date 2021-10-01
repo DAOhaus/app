@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Tab, List, Radio,Loader, Dimmer, Segment, Modal } from "semantic-ui-react";
+import { 
+  Input, 
+  Button, 
+  Tab, 
+  List, 
+  Radio,
+  Loader, 
+  Dimmer, 
+  Segment, 
+  Modal,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Search,
+} from "semantic-ui-react";
 import {useContractReader} from "eth-hooks";
+import {
+} from 'semantic-ui-react'
 
 export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   const [url, setUrl] = useState();
@@ -36,10 +53,6 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   useEffect(()=>{
     getTokenList()
   },[tokenIdsList])
-
-  useEffect(()=>{
-    getTokenList()
-  },[])
 
   const handleMintCallback = (props) => {
     console.log('!', props)
@@ -171,8 +184,36 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   ]
   return (
     <div className="flex justify-content-center mauto w500 mt20">
-      <div className="flex column">
-        <Tab panes={panes}/>
+      <div className="flex column p20 w100p">
+        <Segment placeholder>
+          <Grid columns={2} stackable textAlign='center'>
+            <Divider vertical>Or</Divider>
+
+            <Grid.Row verticalAlign='middle'>
+              <Grid.Column>
+                <Header icon>
+                  <Icon name='building outline mb20' />
+                  Single Title NFT
+                  {/* <p className="t">
+                    Most Common.
+                    This will mint a NFT pointing to the asset's documents.
+                    Best if you want the property to be used in Defi or want to transfer title via token. 
+                  </p> */}
+                </Header>
+                <Button primary>Create</Button>
+              </Grid.Column>
+
+              <Grid.Column>
+                <Header icon>
+                  <Icon name='users' />
+                  Partnership 
+                </Header>
+                <Button primary>Create</Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+        {/* <Tab panes={panes} className="w100p" /> */}
       </div>
     </div>
   );
