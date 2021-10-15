@@ -3,10 +3,10 @@
 
 pragma solidity ^0.8.0;
 
-import "./721/ERC721.sol";
+import "./721/ERC721Tradable.sol";
 import "./utils/Ownable.sol";
 
-contract NFT is ERC721, Ownable{
+contract NFT is ERC721Tradable{
     
     uint8 private tokensCount;
 
@@ -15,19 +15,23 @@ contract NFT is ERC721, Ownable{
     
     constructor (
         string memory name_, 
-        string memory symbol_ 
+        string memory symbol_,
+        address _proxyRegistryAddress
     )
-    ERC721(name_, symbol_)
-    {
-        tokensCount = 0;
-    }
+        ERC721Tradable(name_, symbol_, _proxyRegistryAddress)
+    {}
 
     function getOwnerToTokenIds(address owner) public view returns(uint8[] memory)
     {   
         return ownerToTokenIds[owner];
     }
 
-    function tokenURI(uint256 _tokenId) public view override returns (string memory)
+    function baseTokenURI() pure public returns (string memory)
+    {
+        return ("");
+    }
+
+    function tokenURI(uint256 _tokenId) public override view returns (string memory)
     {
         require(_exists(_tokenId), "ERC721Metadata: URI query for nonexistent token");
         return tokenIdToURI[_tokenId];
@@ -41,7 +45,7 @@ contract NFT is ERC721, Ownable{
         tokenIdToURI[tokenId] = documentURI;
     }
 
-    function mint(string memory _tokenURI) public onlyOwner
+    function mint(string memory _tokenURI) public
     {   
         _mint(msg.sender, tokensCount);
         tokenIdToURI[tokensCount] = _tokenURI;
@@ -49,7 +53,7 @@ contract NFT is ERC721, Ownable{
         tokensCount++;
     }
 
-    function adminTransfer(address to, uint256 tokenId) public onlyOwner
+    function adminTransfer(address to, uint256 tokenId) public
     {
         require(_exists(tokenId), "token doesnt exist");
         for(uint256 i = 0; i < ownerToTokenIds[msg.sender].length; i++)
@@ -64,6 +68,28 @@ contract NFT is ERC721, Ownable{
         }
         ownerToTokenIds[to].push(uint8(tokenId));
         _transfer(msg.sender, to, tokenId);
+    }
+
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        //solhint-disable-next-line max-line-length
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        for(uint256 i = 0; i < ownerToTokenIds[msg.sender].length; i++)
+        {
+            if (ownerToTokenIds[msg.sender][i] == tokenId)
+            {   
+                for (uint j = i; j < ownerToTokenIds[msg.sender].length - 1; j++)
+                    ownerToTokenIds[msg.sender][j] = ownerToTokenIds[msg.sender][j+1];
+                ownerToTokenIds[msg.sender].pop();
+                break;
+            }
+        }
+        ownerToTokenIds[to].push(uint8(tokenId));
+        _transfer(from, to, tokenId);
     }
 
 }
