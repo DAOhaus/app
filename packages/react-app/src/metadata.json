@@ -1,8 +1,8 @@
 {
     "description": "Daohaus NFT - Respresents ownership of physical asset", 
     "external_url": "https://daohaus.org", 
-    "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2UlMjBleHRlcmlvcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80", 
-    "name": "Pretty house with pool",
+    "image": "ipfs://QmVUBTMqeVZm3Cu1aoMGAW1c1szbq4hwd5DrsWv1L3Tj1k", 
+    "name": "Uluwatu ipfs",
     "attributes": [
         {
             "trait_type": "Location", 
