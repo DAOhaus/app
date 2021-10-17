@@ -84,12 +84,13 @@ const SingleEntityForm = ({isOpen,onClose,tx,writeContracts, readContracts, setT
       ]
     }
     ipfs.add(JSON.stringify(metadata)).then(async (res)=>{
+      let tokenId = await readContracts.NFT.totalSupply();
+      tokenId = tokenId.toNumber();
+      console.log(tokenId);
       let result = await tx(writeContracts.NFT.mint("ipfs://"+res.cid.string),async (update)=>{
         if(update)
         {
-          console.log(update.hash);
-          update.tokenId = await readContracts.NFT.totalSupply();
-          setTxData(update)
+          setTxData({...update, tokenId})
           onClose();
         }
       })
@@ -176,7 +177,7 @@ const SingleEntityForm = ({isOpen,onClose,tx,writeContracts, readContracts, setT
   )
 }
 
-const TxWaitModal = ({isOpen,txData,onClose}) => {
+const TxWaitModal = ({isOpen,txData,onClose, readContracts}) => {
   return (
     <Modal
       open={isOpen}
@@ -198,7 +199,7 @@ const TxWaitModal = ({isOpen,txData,onClose}) => {
         }
         {txData && txData.status == "confirmed" &&  
           <div style={{marginTop:"300px"}}>
-            <Button size="big" style={{margin:"auto",marginTop:"120px",width:"50%"}} primary target="_blank" href={txData.hash?"https://testnets.opensea.io/assets/0x9caac3e5b2e81c4fa0d449c7b7bb6acedaffbcd4/"+(txData.tokenId-1):"#"}>View on opensea</Button>
+            <Button size="big" style={{margin:"auto",marginTop:"120px",width:"50%"}} primary target="_blank" href={txData.hash?"https://testnets.opensea.io/assets/"+readContracts.NFT.address+"/"+(txData.tokenId):"#"}>View on opensea</Button>
             <Button size="big" style={{margin:"auto",marginTop:"120px",width:"50%"}}  onClick={onClose}>Close</Button>
           </div>
         } 
@@ -268,6 +269,7 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
         isOpen={txLoading}
         txData={txData}
         onClose={closeTx}
+        readContracts={readContracts}
       />
       
     </div>
