@@ -44,7 +44,6 @@ contract Token is Ownable, ERC20 {
     require(_votes[account] > totalSupply()/2, "Must have over 50%");
     _setOwner(account);
   }
-  
 
   function mint(address account, uint256 value) public onlyOwner {
     _mint(account, value);
