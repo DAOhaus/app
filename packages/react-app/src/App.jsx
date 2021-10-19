@@ -528,7 +528,7 @@ function App(props) {
             <Explore />
           </Route>
           <Route path="/contracts">
-            <div className="flex p20">
+            <div className="flex p20 justify-content-center">
               <Contract
                 name="NFT"
                 signer={userSigner}

@@ -19,8 +19,11 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
       "LEGT20",
       "123 East Street",
       "",
-      ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-      [20],
+      [
+        "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "0xabbaDE5f941f23a48702197866Bf35B8AdC9Ad69",
+      ],
+      [20, 21],
     ],
     log: true,
   });

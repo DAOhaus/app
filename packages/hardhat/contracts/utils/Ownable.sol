@@ -18,7 +18,6 @@ import "./Context.sol";
  */
 abstract contract Ownable is Context {
     address private _owner;
-
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     /**
@@ -63,9 +62,10 @@ abstract contract Ownable is Context {
         _setOwner(newOwner);
     }
 
-    function _setOwner(address newOwner) private {
+    function _setOwner(address newOwner) internal virtual {
         address oldOwner = _owner;
         _owner = newOwner;
         emit OwnershipTransferred(oldOwner, newOwner);
     }
+
 }

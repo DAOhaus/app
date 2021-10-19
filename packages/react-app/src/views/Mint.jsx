@@ -55,12 +55,11 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
   },[tokenIdsList])
 
   const handleMintCallback = (props) => {
-    console.log('!', props)
+    console.log('! success', props)
   }
 
-  const handleClick = async () => {
+  const handleNFTMint = async () => {
     const promise = await tx(writeContracts.NFT.mint(url), handleMintCallback);
-    console.log('!promise', promise) 
   };
 
   const handleSearch = async () =>    
@@ -85,7 +84,7 @@ export default ({userProvider, writeContracts,readContracts, tx, address}) => {
       render : () =>
         <Tab.Pane>
           <Input onChange={e => setUrl(e.target.value)} placeholder="NFT URL" value={url} />
-          <Button primary onClick={handleClick}>
+          <Button primary onClick={handleNFTMint}>
             Deploy
           </Button>
         </Tab.Pane>
