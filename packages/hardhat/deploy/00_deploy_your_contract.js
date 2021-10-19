@@ -40,11 +40,16 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   //   ],
   //   log: true,
   // });
-
+  let openSeaProxyRegistryAddress = "0x0";
+  if (network.name === "rinkeby") {
+    openSeaProxyRegistryAddress = "0xf57b2c51ded3a29e6891aba85459d600256cf317";
+  } else{
+    openSeaProxyRegistryAddress = "0xa5409ec958c83c3f309868babaca7c86dcb077c1";
+  }
   await deploy("NFT", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: ["NFT w/ ADMIN", "LEGT-NFT"],
+    args: ["NFT w/ ADMIN", "LEGT-NFT", openSeaProxyRegistryAddress],
     log: true,
   });
 

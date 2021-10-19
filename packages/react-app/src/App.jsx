@@ -21,7 +21,7 @@ import {
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 // import Hints from "./Hints";
-import { ExampleUI, Hints, Subgraph, Explore, Landing, Mint } from "./views";
+import { ExampleUI, Hints, Subgraph, Explore, Landing, Mint, NewMint } from "./views";
 
 import { useContractConfig } from "./hooks";
 import Portis from "@portis/web3";
@@ -49,10 +49,10 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS.rinkeby; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
-const DEBUG = true;
+const DEBUG = false;
 const NETWORKCHECK = true;
 
 // 🛰 providers
@@ -229,7 +229,6 @@ function App(props) {
 
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
-
   // EXTERNAL CONTRACT EXAMPLE:
   //
   // If you want to bring in the mainnet DAI contract it would look like:
@@ -516,12 +515,20 @@ function App(props) {
             <Landing />
           </Route>
           <Route path="/mint">
-            <Mint
+            {/* <Mint
               userProvider={userProvider} 
               address={address}
               writeContracts={writeContracts}
               readContracts={readContracts}
               tx={tx}
+            /> */}
+            <NewMint
+              userProvider={userProvider} 
+              address={address}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
+
             />
           </Route>
           <Route path="/explore">
