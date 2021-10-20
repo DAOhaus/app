@@ -8,12 +8,12 @@ import "./utils/Ownable.sol";
 
 contract Token is Ownable, ERC20 {
   string public documentURI;
-  struct member 
-  {
-    string name;
-    uint8 percentage;
-    address locatedAt;
+  struct member {
+    bool locked;
   }
+  mapping(address => uint256) public _votes;
+  mapping(address => member) public _members;
+
   constructor (
     string memory name_, 
     string memory symbol_, 
@@ -26,6 +26,23 @@ contract Token is Ownable, ERC20 {
     for(uint256 i = 0; i < members.length; i++) {
       _mint(members[i], amounts[i]);
     }
+  }
+  // user locks tokens to signal ownership change
+  function stakeVote(address account) public {
+    require(_members[msg.sender].locked == false, "Must not already have staked");
+    _votes[account] = _votes[account] + balanceOf(msg.sender);
+    _members[msg.sender].locked = true;
+  }
+  // cancels & unlockes tokens
+  function unstakeVote() public {
+    require(_members[msg.sender].locked, "Must have already voted to resind votes");
+    _votes[msg.sender] = _votes[msg.sender] - balanceOf(msg.sender);
+    _members[msg.sender].locked = false;
+  }
+  // when >50% token holders signal, trigger is allowed to transfer and unlocks  
+  function setNewOwner(address account) public {
+    require(_votes[account] > totalSupply()/2, "Must have over 50%");
+    _setOwner(account);
   }
 
   function mint(address account, uint256 value) public onlyOwner {

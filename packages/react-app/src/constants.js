@@ -38,7 +38,7 @@ export const NETWORKS = {
     faucet: "https://faucet.rinkeby.io/",
     blockExplorer: "https://rinkeby.etherscan.io/",
     contractAddresses : {
-      LegalDoc: "0x5ef62aC8E486f8cef180B301CFd406F221C4382b"
+      NFT: "0x5ef62aC8E486f8cef180B301CFd406F221C4382b"
     }
   },
   ropsten: {
@@ -49,7 +49,7 @@ export const NETWORKS = {
     blockExplorer: "https://ropsten.etherscan.io/",
     rpcUrl: `https://ropsten.infura.io/v3/${INFURA_ID}`,
     contractAddresses : {
-      LegalDoc: "0x093F709ecc87984af3345B6abCB7D2a3d9e40b67"
+      NFT: "0x093F709ecc87984af3345B6abCB7D2a3d9e40b67"
     }
   },
   goerli: {

@@ -1,0 +1,16 @@
+{
+    "description": "Daohaus NFT - Respresents ownership of physical asset", 
+    "external_url": "https://daohaus.org", 
+    "image": "ipfs://QmVUBTMqeVZm3Cu1aoMGAW1c1szbq4hwd5DrsWv1L3Tj1k", 
+    "name": "Uluwatu ipfs",
+    "attributes": [
+        {
+            "trait_type": "Location", 
+            "value": "30.702944, -9.865147"
+          }, 
+          {
+            "trait_type": "Area", 
+            "value": "250 meter**2"
+          }
+    ]
+  }

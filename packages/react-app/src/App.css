@@ -30,6 +30,10 @@
 .text-align-left, .tal { text-align: left;}
 .font-size-30 { font-size: 30px;}
 .font-size-20 { font-size: 20px;}
+.text-regular { 
+  font-size: 14px; 
+  text-decoration: none;
+}
 
 .largeFont { font-size: 28px; }
 .mediumFont { font-size: 16px; }
@@ -79,6 +83,3 @@
 .background-lightgray { background-color: lightgray;}
 .background-white { background-color: white;}
 .border-radius { border-radius: 3px; }
-
-.outline { outline: 1px solid blue;}
-
