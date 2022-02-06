@@ -7,6 +7,8 @@ import "./App.css";
 import { Account, Contract, Faucet, GasGauge, Header, Ramp, ThemeSwitch, CustomHeader } from "./components";
 import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
 import { Transactor } from "./helpers";
+import deployedContracts from "./contracts/hardhat_contracts.json";
+import externalContracts from "./contracts/external_contracts";
 import {
   useBalance,
   useContractLoader,
@@ -24,6 +26,7 @@ import { useContractConfig } from "./hooks";
 import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Authereum from "authereum";
+import { useStaticJsonRPC } from "./hooks";
 
 const { ethers } = require("ethers");
 /*
@@ -46,7 +49,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -54,7 +57,7 @@ const NETWORKCHECK = true;
 const USE_BURNER_WALLET = true; // toggle burner wallet feature
 const USE_NETWORK_SELECTOR = false;
 
-const web3Modal = Web3ModalSetup();
+// const web3Modal = Web3ModalSetup();
 
 // 🛰 providers
 if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
@@ -104,7 +107,7 @@ const web3Modal = new Web3Modal({
   theme: "light", // optional. Change to "dark" for a dark theme.
   providerOptions: {
     walletconnect: {
-      package: WalletConnectProvider, // required
+      // package: WalletConnectProvider, // required
       options: {
         bridge: "https://polygon.bridge.walletconnect.org",
         infuraId: INFURA_ID,
@@ -173,9 +176,7 @@ function App(props) {
 
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
-  const [selectedNetwork, setSelectedNetwork] = useState(networkOptions[0]);
-  const location = useLocation();
-
+  const [selectedNetwork, setSelectedNetwork] = useState('localhost');
   const targetNetwork = NETWORKS[selectedNetwork];
 
   // 🔭 block explorer URL
@@ -185,7 +186,7 @@ function App(props) {
   const localProvider = useStaticJsonRPC([
     process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : targetNetwork.rpcUrl,
   ]);
-  const mainnetProvider = useStaticJsonRPC(providers);
+  // const mainnetProvider = useStaticJsonRPC(providers);
 
   if (DEBUG) console.log(`Using ${selectedNetwork} network`);
 
@@ -491,10 +492,6 @@ function App(props) {
         </Menu> */}
 
       <Switch>
-        <Route exact path="/">
-          {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
-        </Route>
         <Route exact path="/debug">
           {/*
                 🎛 this scaffolding is full of commonly used components
