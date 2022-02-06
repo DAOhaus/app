@@ -1,7 +1,4 @@
-import WalletConnectProvider from "@walletconnect/web3-provider";
-//import Torus from "@toruslabs/torus-embed"
-import WalletLink from "walletlink";
-import { Alert, Button, Col, Menu, Row } from "antd";
+import { Button, Col, Menu, Row } from "antd";
 import "antd/dist/antd.css";
 import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
@@ -33,13 +30,13 @@ const { ethers } = require("ethers");
     Welcome to 🏗 scaffold-eth !
 
     Code:
-    https://github.com/austintgriffith/scaffold-eth
+    https://github.com/scaffold-eth/scaffold-eth
 
     Support:
     https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA
     or DM @austingriffith on twitter or telegram
 
-    You should get your own Infura.io ID and put it in `constants.js`
+    You should get your own Alchemy.com & Infura.io ID and put it in `constants.js`
     (this is your connection to the main Ethereum network for ENS etc.)
 
 
@@ -49,11 +46,15 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
 const NETWORKCHECK = true;
+const USE_BURNER_WALLET = true; // toggle burner wallet feature
+const USE_NETWORK_SELECTOR = false;
+
+const web3Modal = Web3ModalSetup();
 
 // 🛰 providers
 if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
@@ -172,6 +173,24 @@ function App(props) {
 
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
+  const [selectedNetwork, setSelectedNetwork] = useState(networkOptions[0]);
+  const location = useLocation();
+
+  const targetNetwork = NETWORKS[selectedNetwork];
+
+  // 🔭 block explorer URL
+  const blockExplorer = targetNetwork.blockExplorer;
+
+  // load all your providers
+  const localProvider = useStaticJsonRPC([
+    process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : targetNetwork.rpcUrl,
+  ]);
+  const mainnetProvider = useStaticJsonRPC(providers);
+
+  if (DEBUG) console.log(`Using ${selectedNetwork} network`);
+
+  // 🛰 providers
+  if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
 
   const logoutOfWeb3Modal = async () => {
     await web3Modal.clearCachedProvider();
@@ -189,8 +208,7 @@ function App(props) {
   /* 🔥 This hook will get the price of Gas from ⛽️ EtherGasStation */
   const gasPrice = useGasPrice(targetNetwork, "fast");
   // Use your injected provider from 🦊 Metamask or if you don't have it then instantly generate a 🔥 burner wallet.
-  const userProviderAndSigner = useUserProviderAndSigner(injectedProvider);
-  console.log('!!', injectedProvider)
+  const userProviderAndSigner = useUserProviderAndSigner(injectedProvider, localProvider, USE_BURNER_WALLET);
   const userSigner = userProviderAndSigner.signer;
 
   useEffect(() => {
@@ -213,16 +231,15 @@ function App(props) {
   // The transactor wraps transactions and provides notificiations
   const tx = Transactor(userSigner, gasPrice);
 
-  // Faucet Tx can be used to send funds from the faucet
-  const faucetTx = Transactor(localProvider, gasPrice);
-
   // 🏗 scaffold-eth is full of handy hooks like this one to get your balance:
   const yourLocalBalance = useBalance(localProvider, address);
 
   // Just plug in different 🛰 providers to get your balance on different chains:
   const yourMainnetBalance = useBalance(mainnetProvider, address);
 
-  const contractConfig = useContractConfig();
+  // const contractConfig = useContractConfig();
+
+  const contractConfig = { deployedContracts: deployedContracts || {}, externalContracts: externalContracts || {} };
 
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
@@ -247,9 +264,6 @@ function App(props) {
 
   // keep track of a variable from the contract in the local React state:
   const purpose = useContractReader(readContracts, "YourContract", "purpose");
-
-  // 📟 Listen for broadcast events
-  const setPurposeEvents = useEventListener(readContracts, "YourContract", "SetPurpose", localProvider, 1);
 
   /*
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
@@ -292,6 +306,8 @@ function App(props) {
     readContracts,
     writeContracts,
     mainnetContracts,
+    localChainId,
+    myMainnetDAIBalance,
   ]);
 
   let networkDisplay = "";
@@ -398,6 +414,7 @@ function App(props) {
       console.log(code, reason);
       logoutOfWeb3Modal();
     });
+    // eslint-disable-next-line
   }, [setInjectedProvider]);
 
   useEffect(() => {
@@ -406,40 +423,7 @@ function App(props) {
     }
   }, [loadWeb3Modal]);
 
-  const [route, setRoute] = useState();
-  useEffect(() => {
-    setRoute(window.location.pathname);
-  }, [setRoute]);
-
-  let faucetHint = "";
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
-
-  const [faucetClicked, setFaucetClicked] = useState(false);
-  if (
-    !faucetClicked &&
-    localProvider &&
-    localProvider._network &&
-    localProvider._network.chainId === 31337 &&
-    yourLocalBalance &&
-    ethers.utils.formatEther(yourLocalBalance) <= 0
-  ) {
-    faucetHint = (
-      <div style={{ padding: 16 }}>
-        <Button
-          type="primary"
-          onClick={() => {
-            faucetTx({
-              to: address,
-              value: ethers.utils.parseEther("0.01"),
-            });
-            setFaucetClicked(true);
-          }}
-        >
-          💰 Grab funds from the faucet ⛽️
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <div className="App">
@@ -506,9 +490,13 @@ function App(props) {
           </Menu.Item>
         </Menu> */}
 
-        <Switch>
-          <Route exact path="/">
-            {/*
+      <Switch>
+        <Route exact path="/">
+          {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
+          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+        </Route>
+        <Route exact path="/debug">
+          {/*
                 🎛 this scaffolding is full of commonly used components
                   this <Contract/> component will automatically parse your ABI
                   and give you a form to interact with it locally
