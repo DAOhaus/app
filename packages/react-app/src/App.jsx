@@ -101,70 +101,70 @@ const walletLinkProvider = walletLink.makeWeb3Provider(`https://mainnet.infura.i
 /*
   Web3 modal helps us "connect" external wallets:
 */
-const web3Modal = new Web3Modal({
-  network: "mainnet", // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
-  cacheProvider: true, // optional
-  theme: "light", // optional. Change to "dark" for a dark theme.
-  providerOptions: {
-    walletconnect: {
-      // package: WalletConnectProvider, // required
-      options: {
-        bridge: "https://polygon.bridge.walletconnect.org",
-        infuraId: INFURA_ID,
-        rpc: {
-          1: `https://mainnet.infura.io/v3/${INFURA_ID}`, // mainnet // For more WalletConnect providers: https://docs.walletconnect.org/quick-start/dapps/web3-provider#required
-          42: `https://kovan.infura.io/v3/${INFURA_ID}`,
-          100: "https://dai.poa.network", // xDai
-        },
-      },
-    },
-    portis: {
-      display: {
-        logo: "https://user-images.githubusercontent.com/9419140/128913641-d025bc0c-e059-42de-a57b-422f196867ce.png",
-        name: "Portis",
-        description: "Connect to Portis App",
-      },
-      package: Portis,
-      options: {
-        id: "6255fb2b-58c8-433b-a2c9-62098c05ddc9",
-      },
-    },
-    fortmatic: {
-      package: Fortmatic, // required
-      options: {
-        key: "pk_live_5A7C91B2FC585A17", // required
-      },
-    },
-    // torus: {
-    //   package: Torus,
-    //   options: {
-    //     networkParams: {
-    //       host: "https://localhost:8545", // optional
-    //       chainId: 1337, // optional
-    //       networkId: 1337 // optional
-    //     },
-    //     config: {
-    //       buildEnv: "development" // optional
-    //     },
-    //   },
-    // },
-    "custom-walletlink": {
-      display: {
-        logo: "https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0",
-        name: "Coinbase",
-        description: "Connect to Coinbase Wallet (not Coinbase App)",
-      },
-      package: walletLinkProvider,
-      connector: async (provider, _options) => {
-        await provider.enable();
-        return provider;
-      },
-    },
-    authereum: {
-      package: Authereum, // required
-    },
-  },
-});
+// const web3Modal = new Web3Modal({
+//   network: "mainnet", // Optional. If using WalletConnect on xDai, change network to "xdai" and add RPC info below for xDai chain.
+//   cacheProvider: true, // optional
+//   theme: "light", // optional. Change to "dark" for a dark theme.
+//   providerOptions: {
+//     walletconnect: {
+//       // package: WalletConnectProvider, // required
+//       options: {
+//         bridge: "https://polygon.bridge.walletconnect.org",
+//         infuraId: INFURA_ID,
+//         rpc: {
+//           1: `https://mainnet.infura.io/v3/${INFURA_ID}`, // mainnet // For more WalletConnect providers: https://docs.walletconnect.org/quick-start/dapps/web3-provider#required
+//           42: `https://kovan.infura.io/v3/${INFURA_ID}`,
+//           100: "https://dai.poa.network", // xDai
+//         },
+//       },
+//     },
+//     portis: {
+//       display: {
+//         logo: "https://user-images.githubusercontent.com/9419140/128913641-d025bc0c-e059-42de-a57b-422f196867ce.png",
+//         name: "Portis",
+//         description: "Connect to Portis App",
+//       },
+//       package: Portis,
+//       options: {
+//         id: "6255fb2b-58c8-433b-a2c9-62098c05ddc9",
+//       },
+//     },
+//     fortmatic: {
+//       package: Fortmatic, // required
+//       options: {
+//         key: "pk_live_5A7C91B2FC585A17", // required
+//       },
+//     },
+//     // torus: {
+//     //   package: Torus,
+//     //   options: {
+//     //     networkParams: {
+//     //       host: "https://localhost:8545", // optional
+//     //       chainId: 1337, // optional
+//     //       networkId: 1337 // optional
+//     //     },
+//     //     config: {
+//     //       buildEnv: "development" // optional
+//     //     },
+//     //   },
+//     // },
+//     "custom-walletlink": {
+//       display: {
+//         logo: "https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0",
+//         name: "Coinbase",
+//         description: "Connect to Coinbase Wallet (not Coinbase App)",
+//       },
+//       package: walletLinkProvider,
+//       connector: async (provider, _options) => {
+//         await provider.enable();
+//         return provider;
+//       },
+//     },
+//     authereum: {
+//       package: Authereum, // required
+//     },
+//   },
+// });
 
 function App(props) {
   const mainnetProvider =
@@ -396,116 +396,57 @@ function App(props) {
     );
   }
 
-  const loadWeb3Modal = useCallback(async () => {
-    const provider = await web3Modal.connect();
-    setInjectedProvider(new ethers.providers.Web3Provider(provider));
+  // const loadWeb3Modal = useCallback(async () => {
+  //   const provider = await web3Modal.connect();
+  //   setInjectedProvider(new ethers.providers.Web3Provider(provider));
 
-    provider.on("chainChanged", chainId => {
-      console.log(`chain changed to ${chainId}! updating providers`);
-      setInjectedProvider(new ethers.providers.Web3Provider(provider));
-    });
+  //   provider.on("chainChanged", chainId => {
+  //     console.log(`chain changed to ${chainId}! updating providers`);
+  //     setInjectedProvider(new ethers.providers.Web3Provider(provider));
+  //   });
 
-    provider.on("accountsChanged", () => {
-      console.log(`account changed!`);
-      setInjectedProvider(new ethers.providers.Web3Provider(provider));
-    });
+  //   provider.on("accountsChanged", () => {
+  //     console.log(`account changed!`);
+  //     setInjectedProvider(new ethers.providers.Web3Provider(provider));
+  //   });
 
-    // Subscribe to session disconnection
-    provider.on("disconnect", (code, reason) => {
-      console.log(code, reason);
-      logoutOfWeb3Modal();
-    });
-    // eslint-disable-next-line
-  }, [setInjectedProvider]);
+  //   // Subscribe to session disconnection
+  //   provider.on("disconnect", (code, reason) => {
+  //     console.log(code, reason);
+  //     logoutOfWeb3Modal();
+  //   });
+  //   // eslint-disable-next-line
+  // }, [setInjectedProvider]);
 
-  useEffect(() => {
-    if (web3Modal.cachedProvider) {
-      loadWeb3Modal();
-    }
-  }, [loadWeb3Modal]);
+  // useEffect(() => {
+  //   if (web3Modal.cachedProvider) {
+  //     loadWeb3Modal();
+  //   }
+  // }, [loadWeb3Modal]);
 
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
 
   return (
     <div className="App">
-      {/* ✏️ Edit the header and change the title to your project name */}
       {/* <Header /> */}
       <BrowserRouter>
-        <CustomHeader
+        {/* <CustomHeader
           address={address}
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           loadWeb3Modal={loadWeb3Modal}
           userProvider={userSigner?.provider}
-        />
-        {/* 
-        <Menu style={{ textAlign: "center" }} selectedKeys={[route]} mode="horizontal">
-          <Menu.Item key="/">
-            <Link
-              onClick={() => {
-                setRoute("/");
-              }}
-              to="/"
-            >
-              YourContract
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/hints">
-            <Link
-              onClick={() => {
-                setRoute("/hints");
-              }}
-              to="/hints"
-            >
-              Hints
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/exampleui">
-            <Link
-              onClick={() => {
-                setRoute("/exampleui");
-              }}
-              to="/exampleui"
-            >
-              ExampleUI
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/mainnetdai">
-            <Link
-              onClick={() => {
-                setRoute("/mainnetdai");
-              }}
-              to="/mainnetdai"
-            >
-              Mainnet DAI
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/subgraph">
-            <Link
-              onClick={() => {
-                setRoute("/subgraph");
-              }}
-              to="/subgraph"
-            >
-              Subgraph
-            </Link>
-          </Menu.Item>
-        </Menu> */}
+        /> */}
 
       <Switch>
-        <Route exact path="/debug">
-          {/*
-                🎛 this scaffolding is full of commonly used components
-                  this <Contract/> component will automatically parse your ABI
-                  and give you a form to interact with it locally
-            */}
-            <Landing />
-          </Route>
+
           <Route path="/mint">
             <Mint />
           </Route>
+
           <Route path="/explore">
             <Explore />
           </Route>
+
           <Route path="/contracts">
             <Contract
               name="LegalDoc"
@@ -516,110 +457,13 @@ function App(props) {
               contractConfig={contractConfig}
             />
           </Route>
-          {/* <Route path="/exampleui">
-            <ExampleUI
-              address={address}
-              userSigner={userSigner}
-              mainnetProvider={mainnetProvider}
-              localProvider={localProvider}
-              yourLocalBalance={yourLocalBalance}
-              price={price}
-              tx={tx}
-              writeContracts={writeContracts}
-              readContracts={readContracts}
-              purpose={purpose}
-              setPurposeEvents={setPurposeEvents}
-            />
+          <Route path="/">
+            {/* <Landing /> */}
           </Route>
-          <Route path="/mainnetdai">
-            <Contract
-              name="DAI"
-              customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.DAI}
-              signer={userSigner}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer="https://etherscan.io/"
-              contractConfig={contractConfig}
-              chainId={1}
-            />
-            
-            <Contract
-              name="UNI"
-              customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.UNI}
-              signer={userSigner}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer="https://etherscan.io/"
-            />
-           
-          </Route> */}
-          {/* <Route path="/subgraph">
-            <Subgraph
-              subgraphUri={props.subgraphUri}
-              tx={tx}
-              writeContracts={writeContracts}
-              mainnetProvider={mainnetProvider}
-            />
-          </Route> */}
         </Switch>
       </BrowserRouter>
 
-      {/* <ThemeSwitch /> */}
-
-      {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
-      {/* <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
-        <Account
-          address={address}
-          localProvider={localProvider}
-          userSigner={userSigner}
-          mainnetProvider={mainnetProvider}
-          price={price}
-          web3Modal={web3Modal}
-          loadWeb3Modal={loadWeb3Modal}
-          logoutOfWeb3Modal={logoutOfWeb3Modal}
-          blockExplorer={blockExplorer}
-        />
-        {faucetHint}
-      </div> */}
-
-      {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      {/* <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-        <Row align="middle" gutter={[4, 4]}>
-          <Col span={8}>
-            <Ramp price={price} address={address} networks={NETWORKS} />
-          </Col>
-
-          <Col span={8} style={{ textAlign: "center", opacity: 0.8 }}>
-            <GasGauge gasPrice={gasPrice} />
-          </Col>
-          <Col span={8} style={{ textAlign: "center", opacity: 1 }}>
-            <Button
-              onClick={() => {
-                window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
-              }}
-              size="large"
-              shape="round"
-            >
-              <span style={{ marginRight: 8 }} role="img" aria-label="support">
-                💬
-              </span>
-              Support
-            </Button>
-          </Col>
-        </Row>
-
-        <Row align="middle" gutter={[4, 4]}>
-          <Col span={24}>
-            {
-              faucetAvailable ? (
-                <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
-              ) : (
-                ""
-              )
-            }
-          </Col>
-        </Row>
-      </div> */}
+      <ThemeSwitch />
     </div>
   );
 }

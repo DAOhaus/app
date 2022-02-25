@@ -4,6 +4,7 @@ import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { Landing } from "./views";
 import "./index.css";
 
 const themes = {
@@ -24,7 +25,8 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
       <BrowserRouter>
-        <App subgraphUri={subgraphUri} />
+        {/* <App subgraphUri={subgraphUri} /> */}
+        <Landing />
       </BrowserRouter>
     </ThemeSwitcherProvider>
   </ApolloProvider>,

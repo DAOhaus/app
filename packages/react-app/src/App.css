@@ -29,6 +29,7 @@
 .text-align-center, .tac { text-align: center;}
 .text-align-right, .tar { text-align: right;}
 .text-align-left, .tal { text-align: left;}
+.italic {font-style: italic;}
 .font-size-30 { font-size: 30px;}
 .font-size-20 { font-size: 20px;}
 
