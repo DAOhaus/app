@@ -26,8 +26,10 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
       <BrowserRouter>
+        {/* hi */}
         {/* <App subgraphUri={subgraphUri} /> */}
-        <Mint />
+        {/* <Mint /> */}
+        <Landing />
         {/* <Contract
           name="LegalDoc"
           signer={userSigner}

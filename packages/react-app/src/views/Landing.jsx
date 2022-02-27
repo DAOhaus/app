@@ -12,13 +12,14 @@ function App() {
         <p className="jumbotron-desc">
           thinking about, building & financing real world asset daos
           <br />
-          NFT meets RWA meets DAO
+          NFT meets RWA meets ĐAO
           <br />
-          🧘‍♂️🏡🧘‍♂️
+          <br />
+          🧘‍♂️ 🏡 🧘‍♂️
           <div className="flex justify-content-center column mt20">
             <a target="_blank" href="https://github.com/daohaus/paper"><Highlight color="red">Governance Model</Highlight></a>
             <a target="_blank" href="https://github.com/daohaus/eips"><Highlight color="yellow">Legal & Meta Standards</Highlight></a>
-            <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">L£GT DeFi Protocol</Highlight></a>
+            <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">RWA DeFi Protocol</Highlight></a>
           </div>
         </p>
       </div>
@@ -50,7 +51,7 @@ function App() {
             <label className="timeline-event-icon"></label>
             <div className="timeline-event-copy">
               <p className="timeline-event-thumbnail">Legal & Meta Standards</p>
-              <h4>Build & Manage Initial Location</h4>
+              <h4>Acquire & Manage Initial Location</h4>
               <p>
                 Dogfooding our concept as we legally tokenize, build and manage a small complex of buildings in Arecibo, Puerto Rico.  If you would like to get involved in anyway please <a href="mailto:john@daohaus.org">contact me</a>.
               </p>
@@ -60,14 +61,14 @@ function App() {
           <li className="timeline-event active">
             <label className="timeline-event-icon"></label>
             <div className="timeline-event-copy">
-              <p className="timeline-event-thumbnail">L£GT DeFi Protocol</p>
-              <h4>Partnerships, Additional Sites, L£GT Token</h4>
+              <p className="timeline-event-thumbnail">RWA DeFi Protocol</p>
+              <h4>Partnerships, Additional Sites, L£GT ĐAO</h4>
               <p>
                 Integrate with other governance platforms, build out critical partnerships & verticle integrations. Launch a multi-token ecosystem network that will help fuel
                 development of tools and the ecosystem at large as we bring RWAs into the DeFi ecosystem.
                 <br />
                 <br />
-                <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">L£GT DeFi Protocol</Highlight></a>
+                <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">L£GT ĐAO</Highlight></a>
               </p>
             </div>
           </li>
