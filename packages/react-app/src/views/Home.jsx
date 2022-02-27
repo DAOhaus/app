@@ -43,7 +43,7 @@ function Home({ yourLocalBalance, readContracts }) {
           packages/hardhat/contracts
         </span>
       </div>
-      {!purpose?<div style={{ margin: 32 }}>
+      {!purpose ? <div style={{ margin: 32 }}>
         <span style={{ marginRight: 8 }}>👷‍♀️</span>
         You haven't deployed your contract yet, run
         <span
@@ -52,12 +52,12 @@ function Home({ yourLocalBalance, readContracts }) {
         >
           yarn chain
         </span> and <span
-            className="highlight"
-            style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-          >
-            yarn deploy
-          </span> to deploy your first contract!
-      </div>:<div style={{ margin: 32 }}>
+          className="highlight"
+          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
+        >
+          yarn deploy
+        </span> to deploy your first contract!
+      </div> : <div style={{ margin: 32 }}>
         <span style={{ marginRight: 8 }}>🤓</span>
         The "purpose" variable from your contract is{" "}
         <span

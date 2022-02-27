@@ -4,7 +4,8 @@ import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { Landing } from "./views";
+import { Account, Contract, Faucet, GasGauge, Header, Ramp, ThemeSwitch, CustomHeader } from "./components";
+import { Landing, Mint } from "./views";
 import "./index.css";
 
 const themes = {
@@ -26,7 +27,16 @@ ReactDOM.render(
     <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
       <BrowserRouter>
         {/* <App subgraphUri={subgraphUri} /> */}
-        <Landing />
+        <Mint />
+        {/* <Contract
+          name="LegalDoc"
+          signer={userSigner}
+          provider={localProvider}
+          address={address}
+          blockExplorer={blockExplorer}
+          contractConfig={contractConfig}
+        /> */}
+        {/* <Landing /> */}
       </BrowserRouter>
     </ThemeSwitcherProvider>
   </ApolloProvider>,

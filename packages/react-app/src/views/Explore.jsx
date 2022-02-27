@@ -1,6 +1,6 @@
 import React from "react"
-import styled from 'styled-components'
 import { PageWrapper } from '../components'
+import styled from 'styled-components'
 
 const Square = styled.div`
   width: 200px;

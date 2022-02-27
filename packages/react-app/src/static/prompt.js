@@ -1,18 +1,18 @@
 // https://github.com/talor-hammond/formik-react-hooks-multi-step-form
 
 export default [
-    {
-        id: '1',
-        category: 'general',
-        text: 'What do you want to create a token for?',
-        choices: ['business', 'personal residence', 'community project', 'other'],
-        options: [
-            {
-                text: 'Want it to be singly or collectively owned and operated?',
-                choices: ['single', 'collective']
-            }
-        ]
-    },
+  {
+    id: '1',
+    category: 'general',
+    text: 'What do you want to create a token for?',
+    choices: ['business', 'personal residence', 'community project', 'other'],
+    options: [
+      {
+        text: 'Want it to be singly or collectively owned and operated?',
+        choices: ['single', 'collective']
+      }
+    ]
+  },
 ]
 
 // business
@@ -37,4 +37,3 @@ export default [
 //         - voting and governance
 //     - Do you already have your legal framework established
 //     - equal ownership spread out across entire group or specifically
- 

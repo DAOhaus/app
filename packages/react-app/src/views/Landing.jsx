@@ -12,7 +12,7 @@ function App() {
         <p className="jumbotron-desc">
           thinking about, building & financing real world asset daos
           <br />
-          NFT meets RWA meets DAO 
+          NFT meets RWA meets DAO
           <br />
           🧘‍♂️🏡🧘‍♂️
           <div className="flex justify-content-center column mt20">
@@ -86,9 +86,10 @@ function App() {
         </p>
 
         <p>Three large similarities exist between managing a real estate property, and governing a nation.
-          Namely the <strong className="underline">the creation of rules</strong> called laws,&nbsp;
-          <strong className="underline">the enforcement of those rules</strong>, and the&nbsp;
-          <strong className="underline">the management of an escrow account</strong> that we all fund through fees & estate sales.</p>
+        Namely the <strong className="underline">the creation of rules</strong> called laws,&nbsp;
+        <strong className="underline">the enforcement of those rules</strong>, and the&nbsp;
+        <strong className="underline">the management of an escrow account</strong> that we all fund through fees & estate sales.
+        </p>
 
         <p>Creating the framework for doing those three things on a much smaller and simpler scale holds an important
           advantage which is flexibility. We start small, so that we can learn from flaws in the design, build it incrementally,
@@ -103,9 +104,9 @@ function App() {
         <p>Greed, corruption and incompetence cannot be solved by purely technical solutions, but our hope is that □∆○haus will grow
           into an ecosystem used to combat such evils. If you'd like to read more of my thoughts on the subject, please see the afterword
           where I briefly address the implications of this project on our&nbsp;
-          <a target="_blank" href="https://github.com/daohaus/paper#finances">financial</a>,&nbsp;
-          <a target="_blank" href="https://github.com/daohaus/paper#policy">policy</a> and&nbsp;
-          <a target="_blank" href="https://github.com/daohaus/paper#enforcement">enforcement</a> practices.
+        <a target="_blank" href="https://github.com/daohaus/paper#finances">financial</a>,&nbsp;
+        <a target="_blank" href="https://github.com/daohaus/paper#policy">policy</a> and&nbsp;
+        <a target="_blank" href="https://github.com/daohaus/paper#enforcement">enforcement</a> practices.
         </p>
 
         <p>In the same way that the Bauhaus movement was characterized by a minimalist type of design,
