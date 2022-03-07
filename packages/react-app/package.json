@@ -1,7 +1,7 @@
 {
   "name": "@scaffold-eth/react-app",
   "version": "1.0.1",
-  "homepage": ".",
+  "homepage": "https://daohaus.org",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -40,6 +40,7 @@
     "ethers": "^5.4.1",
     "formik": "^2.2.9",
     "fortmatic": "^2.2.1",
+    "gh-pages": "^3.2.3",
     "graphiql": "^1.4.7",
     "graphql": "^15.3.0",
     "ipfs-http-client": "^55.0.0",
@@ -54,10 +55,10 @@
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "searchico": "^1.2.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "styled-components": "^5.3.1",
-    "searchico": "^1.2.1",
     "walletlink": "^2.1.5",
     "web3modal": "^1.9.1",
     "yup": "^0.32.11"

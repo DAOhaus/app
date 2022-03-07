@@ -10,7 +10,7 @@ function App() {
         <img src={logo} alt="logo" style={{ width: 80, marginBottom: 15 }} />
         <h1 className="strong">daohaus</h1>
         <p className="jumbotron-desc">
-          thinking about, building & financing real world asset daos
+          building & financing real world asset daos
           <br />
           NFT meets RWA meets ĐAO
           <br />
@@ -19,7 +19,8 @@ function App() {
           <div className="flex justify-content-center column mt20">
             <a target="_blank" href="https://github.com/daohaus/paper"><Highlight color="red">Governance Model</Highlight></a>
             <a target="_blank" href="https://github.com/daohaus/eips"><Highlight color="yellow">Legal & Meta Standards</Highlight></a>
-            <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">RWA DeFi Protocol</Highlight></a>
+            <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">L£GT DeFi Protocol</Highlight></a>
+            {/* <a target="_blank" href=""><Highlight color="green">Consumer Brand</Highlight></a> */}
           </div>
         </p>
       </div>
@@ -62,9 +63,9 @@ function App() {
             <label className="timeline-event-icon"></label>
             <div className="timeline-event-copy">
               <p className="timeline-event-thumbnail">RWA DeFi Protocol</p>
-              <h4>Partnerships, Additional Sites, L£GT ĐAO</h4>
+              <h4>Partnerships & Additional Services</h4>
               <p>
-                Integrate with other governance platforms, build out critical partnerships & verticle integrations. Launch a multi-token ecosystem network that will help fuel
+                Integrate with other governance platforms, build out critical partnerships & verticle integrations. Launch a multi-token ecosystem that will help fuel
                 development of tools and the ecosystem at large as we bring RWAs into the DeFi ecosystem.
                 <br />
                 <br />
