@@ -18,7 +18,7 @@ function App() {
           🧘‍♂️ 🏡 🧘‍♂️
           <div className="flex justify-content-center column mt20">
             <a target="_blank" href="https://github.com/daohaus/paper"><Highlight color="red">Governance Model</Highlight></a>
-            <a target="_blank" href="https://github.com/daohaus/eips"><Highlight color="yellow">Legal & Meta Standards</Highlight></a>
+            <a target="_blank" href="https://github.com/DAOhaus/EIPs/blob/master/EIPS/eip-1776.md"><Highlight color="yellow">Legal & Meta Standards</Highlight></a>
             <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">L£GT DeFi Protocol</Highlight></a>
             {/* <a target="_blank" href=""><Highlight color="green">Consumer Brand</Highlight></a> */}
           </div>
@@ -54,7 +54,7 @@ function App() {
               <p className="timeline-event-thumbnail">Legal & Meta Standards</p>
               <h4>Acquire & Manage Initial Location</h4>
               <p>
-                Dogfooding our concept as we legally tokenize, build and manage a small complex of buildings in Arecibo, Puerto Rico.  If you would like to get involved in anyway please <a href="mailto:john@daohaus.org">contact me</a>.
+                Utilizing our concepts and tools as we legally tokenize, build and manage a small complex of buildings in Arecibo, Puerto Rico.  If you would like to get involved in anyway please <a href="mailto:john@daohaus.org">contact me</a>.
               </p>
               <iframe width='100%' height='300' src='https://my.matterport.com/show/?m=baZFXW5oz8h&brand=0' frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
             </div>
