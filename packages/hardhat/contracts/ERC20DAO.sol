@@ -6,7 +6,7 @@ pragma solidity ^0.8.0;
 import "./20/ERC20.sol";
 import "./utils/Ownable.sol";
 
-contract Token is Ownable, ERC20 {
+contract ERC20DAO is Ownable, ERC20 {
   string public documentURI;
   struct member 
   {

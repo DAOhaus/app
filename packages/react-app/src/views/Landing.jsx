@@ -19,7 +19,7 @@ function App() {
           <div className="flex justify-content-center column mt20">
             <a target="_blank" href="https://github.com/daohaus/paper"><Highlight color="red">Governance Model</Highlight></a>
             <a target="_blank" href="https://github.com/DAOhaus/EIPs/blob/master/EIPS/eip-1776.md"><Highlight color="yellow">Legal & Meta Standards</Highlight></a>
-            <a target="_blank" href="https://legt.gitbook.io"><Highlight color="blue">L£GT DeFi Protocol</Highlight></a>
+            <a target="_blank" href="https://legt.co"><Highlight color="blue">L£GT DeFi Protocol</Highlight></a>
             {/* <a target="_blank" href=""><Highlight color="green">Consumer Brand</Highlight></a> */}
           </div>
         </p>
