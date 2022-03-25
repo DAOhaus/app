@@ -80,10 +80,10 @@ function App() {
         {/* <p style={{marginBottom: 20}}>Read the original <a target="_blank" href="https://github.com/daohaus/paper">paper</a></p> */}
 
         <p>An experiment to create governance models & marketplaces to be used for underlying real world assets.&nbsp;
-          <strong className="underline">Our initial aim is to purchase, manage, and enjoy a single real estate property in multiple jurisdictions.</strong></p>
+          <strong className="underline">Our aim is to purchase, manage, and enjoy private property in multiple jurisdictions.</strong></p>
         <p>
           The hope is to use this specific scope to expand and grow the idea into governance of a community, and eventually a nation. Hopefully
-          bringing us closer to a more pure, accountable, and fluid government of public/private organizations. One that is voluntarily chosen by the people, managed by
+          bringing us closer to a more pure, accountable, and fluid government of public/private organizations chosen by the people, managed by
           the people and serves at the will of the people.
         </p>
 
