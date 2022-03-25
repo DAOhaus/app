@@ -100,10 +100,10 @@ function App() {
         <p>In regards to the larger political dialogue that's occurring, we hope to be a proving ground for the advantages of a proposal governance over
           charismatic representative based system that pulls from major political parties. </p>
 
-        <p>Our current system has served us well, howevber with the maturity of technologies such as the internet and blockchain, our system has&nbsp;
-          <strong className="underline">become outdated and unnecessary</strong></p>
+        <p>Our current system has served us well, however with the maturity of technologies such as the internet and blockchain, our system has&nbsp;
+          <strong className="underline">a strong need of upgrade.</strong></p>
 
-        <p>Greed, corruption and incompetence cannot be solved by purely technical solutions, but our hope is that □∆○haus will grow
+        <p>Greed, corruption and incompetence cannot be solved by purely technical solutions, but our hope is that □∆○ will grow
           into an ecosystem used to combat such evils. If you'd like to read more of my thoughts on the subject, please see the afterword
           where I briefly address the implications of this project on our&nbsp;
         <a target="_blank" href="https://github.com/daohaus/paper#finances">financial</a>,&nbsp;
