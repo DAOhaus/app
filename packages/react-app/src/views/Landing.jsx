@@ -1,7 +1,14 @@
 import React from 'react'
 import logo from '../static/logo.png'
+import image from '../static/arecibo.jpg'
 import '../Landing.css'
+import styled from "styled-components";
 import { Highlight } from "../components";
+
+const Img = styled.img`
+  max-width: 500px;
+  width: 100%;
+`
 
 function App() {
   return (
@@ -56,7 +63,7 @@ function App() {
               <p>
                 Utilizing our concepts and tools as we legally tokenize, build and manage a small complex of buildings in Arecibo, Puerto Rico.  If you would like to get involved in anyway please <a href="mailto:john@daohaus.org">contact me</a>.
               </p>
-              <iframe width='100%' height='300' src='https://my.matterport.com/show/?m=baZFXW5oz8h&brand=0' frameBorder='0' allowFullScreen allow='xr-spatial-tracking'></iframe>
+              <Img src={image} width="600" />
             </div>
           </li>
           <li className="timeline-event active">
