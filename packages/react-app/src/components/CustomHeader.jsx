@@ -28,10 +28,10 @@ export default function CustomHeader({ address, logoutOfWeb3Modal, loadWeb3Modal
 
   return (
     <div
-      className="header flex justify-content-between align-items-center p20 text-align-left"
+      className="header flex justify-content-between align-items-center p20 text-align-left absolute w100p"
       style={{ borderBottom: "1px solid lightGray", height: "70px" }}
     >
-      <div>
+      <div className="flex align-items-center">
         <HeaderLink to="/" className="mr20 font-size-30">
           <img src={logo} height="40px" alt="balance" />
         </HeaderLink>

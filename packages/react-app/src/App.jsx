@@ -20,7 +20,7 @@ import {
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 // import Hints from "./Hints";
-import { ExampleUI, Hints, Subgraph, Explore, Landing, Mint } from "./views";
+import { ExampleUI, Hints, Subgraph, Explore, Landing, Mint, Rise } from "./views";
 
 import { useContractConfig } from "./hooks";
 import Portis from "@portis/web3";
@@ -242,6 +242,7 @@ function App(props) {
   ]);
 
   let networkDisplay = "";
+
   if (NETWORKCHECK && localChainId && selectedChainId && localChainId !== selectedChainId) {
     const networkSelected = NETWORK(selectedChainId);
     const networkLocal = NETWORK(localChainId);
@@ -330,36 +331,50 @@ function App(props) {
 
   return (
     <div className="App">
-      {/* <Header /> */}
       <BrowserRouter>
         {/* <CustomHeader
           address={address}
           logoutOfWeb3Modal={logoutOfWeb3Modal}
-          loadWeb3Modal={loadWeb3Modal}
+          // loadWeb3Modal={loadWeb3Modal}
           userProvider={userSigner?.provider}
         /> */}
         <Switch>
           <Route path="/mint">
             <Mint />
           </Route>
+          <Route path="/rise">
+            <Rise />
+          </Route>
 
           <Route path="/explore">
             <Explore />
           </Route>
 
-          <Route path="/contracts">
+          {/* <Route path="/1776">
             <Contract
-              name="LegalDoc"
+              name="ERC20DAO"
               signer={userSigner}
               provider={localProvider}
               address={address}
               blockExplorer={blockExplorer}
               contractConfig={contractConfig}
             />
-          </Route>
-          <Route path="/">
-            {/* <Landing /> */}
-          </Route>
+          </Route> */}
+
+          {/* <Route path="/nft" >
+            <Contract
+              name="NFT"
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Route> */}
+
+          {/* <Route path="/">
+            <Landing />
+          </Route> */}
         </Switch>
       </BrowserRouter>
 

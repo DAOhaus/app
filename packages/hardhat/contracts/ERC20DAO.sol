@@ -28,12 +28,15 @@ contract ERC20DAO is Ownable, ERC20 {
     }
   }
 
+  // modifier massApproval(uint price) {}
+
   function mint_owner(address account, uint256 value) public onlyOwner { _mint(account, value); }
   function burn_owner(address account, uint256 value) public onlyOwner { _burn(account, value); }
   function setName_owner(string memory newName) public onlyOwner { _name = newName; }
   function setSymbol_owner(string memory newSymbol) public onlyOwner { _symbol = newSymbol; }
   function setDocumentURI_owner(string memory newURI) public onlyOwner { documentURI = newURI; }
-  function stakeForOwnerChange(address newOwner, uint256 value) public {
-    
+  function stakeForChange(address newOwner, uint256 value) public {
   }
+
+  // function mint_owner(address account, uint256 value) public onlyOwner { _mint(account, value); }
 }

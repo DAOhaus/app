@@ -5,3 +5,4 @@ export { default as Subgraph } from "./Subgraph";
 export { default as Mint } from "./Mint";
 export { default as Landing } from "./Landing";
 export { default as Explore } from "./Explore";
+export { default as Rise } from "./Rise";

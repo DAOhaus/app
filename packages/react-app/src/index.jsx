@@ -27,9 +27,9 @@ ReactDOM.render(
     <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
       <BrowserRouter>
         {/* hi */}
-        {/* <App subgraphUri={subgraphUri} /> */}
+        <App subgraphUri={subgraphUri} />
         {/* <Mint /> */}
-        <Landing />
+        {/* <Landing /> */}
         {/* <Contract
           name="LegalDoc"
           signer={userSigner}

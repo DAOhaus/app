@@ -1,0 +1,35 @@
+gh api graphql -f query='
+  query{
+    organization(login: "daohaus"){
+      projectsV2(first:20) { 
+        nodes {
+          id
+          title
+          content
+        }
+      }
+    }
+  }'
+  =>
+  {
+  "data": {
+    "organization": {
+      "projectsV2": {
+        "nodes": [
+          {
+            "id": "PVT_kwDOAdhJTs4AEO5t",
+            "title": "MIHW"
+          },
+          {
+            "id": "PVT_kwDOAdhJTs4ADwWk",
+            "title": "L£GT"
+          },
+          {
+            "id": "PVT_kwDOAdhJTs4ABItu",
+            "title": "⃞△⃝"
+          }
+        ]
+      }
+    }
+  }
+}

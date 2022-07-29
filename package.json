@@ -16,6 +16,7 @@
     "react-app:test": "yarn workspace @scaffold-eth/react-app test",
     "build": "yarn workspace @scaffold-eth/react-app build --max-old-space-size=12288",
     "deploy": "echo 'daohaus.org' > packages/react-app/build/CNAME && yarn workspace @scaffold-eth/react-app gh-pages -d build",
+    "dev-deploy": "yarn workspace @scaffold-eth/react-app build && cp packages/react-app/build/index.html packages/react-app/build/200.html && npx surge packages/react-app/build --domain daohaus-dev.surge.sh ",
     "prettier": "yarn workspace @scaffold-eth/react-app prettier",
     "chain": "yarn workspace @scaffold-eth/hardhat chain",
     "fork": "yarn workspace @scaffold-eth/hardhat fork",

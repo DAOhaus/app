@@ -1,0 +1,121 @@
+gh api graphql -f query='
+  query{
+    node(id: "PVT_kwDOAdhJTs4AEO5t") {
+        ... on ProjectV2 {
+          items(first: 20) {
+            nodes{
+              id
+              fieldValues(first: 8) {
+                nodes{                
+                  ... on ProjectV2ItemFieldTextValue {
+                    text
+                    field {
+                      ... on ProjectV2FieldCommon {
+                        name
+                      }
+                    }
+                  }
+                  ... on ProjectV2ItemFieldDateValue {
+                    date
+                    field {
+                      ... on ProjectV2FieldCommon {
+                        name
+                      }
+                    }
+                  }
+                  ... on ProjectV2ItemFieldSingleSelectValue {
+                    name
+                    field {
+                      ... on ProjectV2FieldCommon {
+                        name
+                      }
+                    }
+                  }
+                }              
+              }
+              content{              
+                ... on DraftIssue {
+                  title
+                  body
+                }
+                ...on Issue {
+                  title
+                  assignees(first: 10) {
+                    nodes{
+                      login
+                    }
+                  }
+                }
+                ...on PullRequest {
+                  title
+                  assignees(first: 10) {
+                    nodes{
+                      login
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }'
+    =>
+    {
+  "data": {
+    "node": {
+      "items": {
+        "nodes": [
+          {
+            "id": "PVTI_lADOAdhJTs4AEO5tzgBz9bw",
+            "fieldValues": {
+              "nodes": [
+                {},
+                {
+                  "text": "Create Crepe Proposal",
+                  "field": {
+                    "name": "Title"
+                  }
+                },
+                {
+                  "name": "Todo",
+                  "field": {
+                    "name": "Status"
+                  }
+                }
+              ]
+            },
+            "content": {
+              "title": "Create Crepe Proposal",
+              "body": ""
+            }
+          },
+          {
+            "id": "PVTI_lADOAdhJTs4AEO5tzgBz9b0",
+            "fieldValues": {
+              "nodes": [
+                {},
+                {
+                  "text": "Create Menu",
+                  "field": {
+                    "name": "Title"
+                  }
+                },
+                {
+                  "name": "Todo",
+                  "field": {
+                    "name": "Status"
+                  }
+                }
+              ]
+            },
+            "content": {
+              "title": "Create Menu",
+              "body": ""
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+                gh api graphql -f query='
+  query{
+  node(id: "PVT_kwDOAdhJTs4AEO5t") {
+    ... on ProjectV2 {
+      fields(first: 20) {
+        nodes {
+          ... on ProjectV2Field {
+            id
+            name
+          }
+          ... on ProjectV2IterationField {
+            id
+            name
+            configuration {
+              iterations {
+                startDate
+                id
+              }
+            }
+          }
+          ... on ProjectV2SingleSelectField {
+            id
+            name
+            options {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}'
+=>
+{
+  "data": {
+    "node": {
+      "fields": {
+        "nodes": [
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCdY",
+            "name": "Title"
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCdc",
+            "name": "Assignees"
+          },
+          {
+            "id": "PVTSSF_lADOAdhJTs4AEO5tzgCcCdg",
+            "name": "Status",
+            "options": [
+              {
+                "id": "f75ad846",
+                "name": "Todo"
+              },
+              {
+                "id": "47fc9ee4",
+                "name": "In Progress"
+              },
+              {
+                "id": "98236657",
+                "name": "Done"
+              }
+            ]
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCdk",
+            "name": "Labels"
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCdo",
+            "name": "Linked pull requests"
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCds",
+            "name": "Tracks"
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCdw",
+            "name": "Reviewers"
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCd0",
+            "name": "Repository"
+          },
+          {
+            "id": "PVTF_lADOAdhJTs4AEO5tzgCcCd4",
+            "name": "Milestone"
+          }
+        ]
+      }
+    }
+  }
+}
+(END)

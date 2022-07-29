@@ -1,0 +1,4 @@
+gh api graphql -f query='
+  mutation {
+    addProjectCard(input: {contentId: "PVT_kwDOAdhJTs4AEO5t" title: "Sample Title"})
+  }'
