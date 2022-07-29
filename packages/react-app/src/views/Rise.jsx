@@ -8,7 +8,7 @@ const instance = axios.create({
   baseURL: 'https://api.rise.com/',
   timeout: 1000,
   headers: { 
-    'Authorization': 'Bearer 0b4bf39b-5250-4e3d-8274-8093aca3661c.hE2dlQxruswSQLPtaTaJIlywjUWGt912P8IjWNQ0iS5ubV',
+    'Authorization': 'Bearer ',
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   }
@@ -21,7 +21,7 @@ const getData = () => {
   console.log('getting')
   const testURL = url+'users';
 	const myInit = {
-		method: 'HEAD',
+		method: '',
 		mode: 'no-cors',
 	};
 
