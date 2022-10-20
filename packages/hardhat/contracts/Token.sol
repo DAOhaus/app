@@ -33,7 +33,14 @@ contract Token is Ownable, ERC20 {
   function setName_owner(string memory newName) public onlyOwner { _name = newName; }
   function setSymbol_owner(string memory newSymbol) public onlyOwner { _symbol = newSymbol; }
   function setDocumentURI_owner(string memory newURI) public onlyOwner { documentURI = newURI; }
-  function stakeForOwnerChange(address newOwner, uint256 value) public {
-    
-  }
+  function nftSet_owner(string memory newURI) public onlyOwner { /* set NFT document URI */ }
+
+  function nftSetStake(address nftAddress, string memory newNFTURI) public { /* call contract at address to change URI to passed string */ }
+  function nftSetExecute() public { /* call contract at address to update new URI string */ }
+  function ownerChangeStake(address newOwner, uint256 value) public { /* lock value passed into an array of new token balances */ }
+  function ownerChangeExecute() public { /* check to see if ownership passes passing ratio */ }
+  function removeMemberStake() public { /*  state to remove member */ }
+  function removeMemberExecute()public{}
+  function ratioChangeStake()public{ }
+  function ratioChangeExecute()public{ }
 }

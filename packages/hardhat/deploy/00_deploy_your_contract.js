@@ -28,34 +28,34 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
-      "NORMAL COIN",
-      "NCOIN",
+      "L£GT DAO",
+      "L£GT",
       "",
-      ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-      [20],
+      ["0xabbade5f941f23a48702197866bf35b8adc9ad69"],
+      [1000000],
     ],
     log: true,
   });
 
-  await deploy("MultiToken", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    args: [
-      "Daohaus",
-      "haus",
-      "",
-      ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
-      [5000],
-    ],
-    log: true,
-  });
+  // await deploy("MultiToken", {
+  //   // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+  //   from: deployer,
+  //   args: [
+  //     "Daohaus",
+  //     "haus",
+  //     "",
+  //     ["0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"],
+  //     [5000],
+  //   ],
+  //   log: true,
+  // });
 
-  await deploy("NFT", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    args: ["LegalDocs", "legt"],
-    log: true,
-  });
+  // await deploy("NFT", {
+  //   // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+  //   from: deployer,
+  //   args: ["LegalDocs", "legt"],
+  //   log: true,
+  // });
 
   // Getting a previously deployed contract
   const Token = await ethers.getContract("Token", deployer);

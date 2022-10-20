@@ -4,7 +4,7 @@ import { Highlight, Account, ThemeSwitch, Text } from "./";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Dropdown, Button } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
+// import "semantic-ui-css/semantic.min.css";
 import { shortenAddress } from "../helpers";
 const { version } = require("../../package.json");
 

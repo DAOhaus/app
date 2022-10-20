@@ -27,8 +27,8 @@ import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Authereum from "authereum";
 import { useStaticJsonRPC } from "./hooks";
-
-const { ethers } = require("ethers");
+import { ethers } from 'ethers'
+// const { ethers } = require("ethers");
 /*
     Welcome to 🏗 scaffold-eth !
 

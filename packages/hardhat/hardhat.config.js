@@ -71,15 +71,22 @@ module.exports = {
         (you can put in a mnemonic here to set the deployer locally)
       
       */
+        accounts: {
+          mnemonic: "test test test test test test test test test test test junk"
+        }
+      // accounts: [2508321a527d7ba7958df79c691e6e68dc233c33ca25f35bcef493e7294353e8] 
     },
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/0a4973254e424af3ae276c51589d6e85", // <---- YOUR INFURA ID! (or it won't work)
       
        //    url: "https://speedy-nodes-nyc.moralis.io/XXXXXXXXXXXXXXXXXXXXXXX/eth/rinkeby", // <---- YOUR MORALIS ID! (not limited to infura)
-      
-      accounts: {
-        mnemonic: mnemonic(),
-      },
+      accounts: ["2508321a527d7ba7958df79c691e6e68dc233c33ca25f35bcef493e7294353e8"],
+      // accounts: {
+      //   mnemonic: "test test test test test test test test test test test junk"
+      // }
+      // accounts: {
+      //   mnemonic: mnemonic(),
+      // },
     },
     kovan: {
       url: "https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", // <---- YOUR INFURA ID! (or it won't work)

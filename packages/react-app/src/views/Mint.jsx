@@ -2,73 +2,73 @@ import React, { useState } from "react";
 import { Input, Button } from "semantic-ui-react";
 import prompt from '../static/prompt';
 import * as Yup from 'yup';
-import { Formik, Field, Form, ErrorMessage, useField, useFormikContext } from 'formik';
+// import { Formik, Field, Form, ErrorMessage, useField, useFormikContext } from 'formik';
 // import styled from 'styled-components'
 // const  = styled.div
 
-const Wizard = ({ children, initialValues, onSubmit }) => {
-  const [stepNumber, setStepNumber] = useState(0);
-  const steps = React.Children.toArray(children);
-  const [snapshot, setSnapshot] = useState(initialValues);
+// const Wizard = ({ children, initialValues, onSubmit }) => {
+//   const [stepNumber, setStepNumber] = useState(0);
+//   const steps = React.Children.toArray(children);
+//   const [snapshot, setSnapshot] = useState(initialValues);
 
-  const step = steps[stepNumber];
-  const totalSteps = steps.length;
-  const isLastStep = stepNumber === totalSteps - 1;
+//   const step = steps[stepNumber];
+//   const totalSteps = steps.length;
+//   const isLastStep = stepNumber === totalSteps - 1;
 
-  const next = values => {
-    setSnapshot(values);
-    setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
-  };
+//   const next = values => {
+//     setSnapshot(values);
+//     setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
+//   };
 
-  const previous = values => {
-    setSnapshot(values);
-    setStepNumber(Math.max(stepNumber - 1, 0));
-  };
+//   const previous = values => {
+//     setSnapshot(values);
+//     setStepNumber(Math.max(stepNumber - 1, 0));
+//   };
 
-  const handleSubmit = async (values, bag) => {
-    if (step.props.onSubmit) {
-      await step.props.onSubmit(values, bag);
-    }
-    if (isLastStep) {
-      return onSubmit(values, bag);
-    } else {
-      bag.setTouched({});
-      next(values);
-    }
-  };
+//   const handleSubmit = async (values, bag) => {
+//     if (step.props.onSubmit) {
+//       await step.props.onSubmit(values, bag);
+//     }
+//     if (isLastStep) {
+//       return onSubmit(values, bag);
+//     } else {
+//       bag.setTouched({});
+//       next(values);
+//     }
+//   };
 
-  return (
-    <Formik
-      initialValues={snapshot}
-      onSubmit={handleSubmit}
-      validationSchema={step.props.validationSchema}
-    >
-      {formik => (
-        <Form>
-          hi
-          {/* <p>
-            Step {stepNumber + 1} of {totalSteps}
-          </p>
-          {step}
-          <div style={{ display: 'flex' }}>
-            {stepNumber > 0 && (
-              <button onClick={() => previous(formik.values)} type="button">
-                Back
-              </button>
-            )}
-            <div>
-              <button disabled={formik.isSubmitting} type="submit">
-                {isLastStep ? 'Submit' : 'Next'}
-              </button>
-            </div>
-          </div> */}
-        </Form>
-      )}
-    </Formik>
-  );
-};
+//   return (
+//     <Formik
+//       initialValues={snapshot}
+//       onSubmit={handleSubmit}
+//       validationSchema={step.props.validationSchema}
+//     >
+//       {formik => (
+//         <Form>
+//           hi
+//           {/* <p>
+//             Step {stepNumber + 1} of {totalSteps}
+//           </p>
+//           {step}
+//           <div style={{ display: 'flex' }}>
+//             {stepNumber > 0 && (
+//               <button onClick={() => previous(formik.values)} type="button">
+//                 Back
+//               </button>
+//             )}
+//             <div>
+//               <button disabled={formik.isSubmitting} type="submit">
+//                 {isLastStep ? 'Submit' : 'Next'}
+//               </button>
+//             </div>
+//           </div> */}
+//         </Form>
+//       )}
+//     </Formik>
+//   );
+// };
 
-const WizardStep = ({ children }) => children;
+// const WizardStep = ({ children }) => children;
 
 export default props => {
   const [url, setUrl] = useState();
@@ -78,7 +78,7 @@ export default props => {
   return (
     <div className="flex justify-content-center mauto w300 mt20">
       <div className=" flex column">
-        <Wizard
+        {/* <Wizard
           initialValues={{
             email: '',
             firstName: '',
@@ -147,7 +147,7 @@ export default props => {
               Deploy
             </Button>
           </WizardStep>
-        </Wizard>
+        </Wizard> */}
       </div>
     </div>
   );
