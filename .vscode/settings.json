@@ -33,8 +33,9 @@
       "**/yarn.lock": true
    },
    "workbench.colorCustomizations": {
-      "activityBar.background": "#4E2001",
-      "titleBar.activeBackground": "#6E2D01",
+      "activityBar.background": "#ff000015",
+      "titleBar.activeBackground": "#ff000015",
       "titleBar.activeForeground": "#FFFBF8"
-   }
+   },
+   "window.autoDetectColorScheme": false
 }
